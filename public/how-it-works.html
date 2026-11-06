@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How It Works & Transparent Fee Model — Ginhawa App</title>
+  <meta name="description" content="Understand the complete Ginhawa booking flow, therapist qualification standards, and our transparent fee split with therapist welfare fund." />
+  
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-lockup">
+        <img src="assets/logo.jpg" alt="Ginhawa Emblem" class="brand-emblem" />
+        <div class="brand-text">
+          <span class="brand-title">GINHAWA</span>
+          <span class="brand-sub">A P P</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="therapists.html" class="nav-link">Therapists</a>
+        <a href="how-it-works.html" class="nav-link active">How It Works</a>
+        <a href="safety.html" class="nav-link">Safety & Compliance</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="therapist-portal.html" class="btn-login">Login</a>
+        <button class="btn-signup" onclick="openBookingModal()">Book Appointment</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section style="background: radial-gradient(circle at 80% 20%, #7A1422, #3E060D); color: #fff; padding: 56px 0; border-bottom: 2px solid rgba(212, 175, 55, 0.3);">
+    <div class="container" style="max-width: 820px; text-align: center;">
+      <span class="section-kicker" style="color: var(--gold-light);">THE GINHAWA SYSTEM</span>
+      <h1 style="font-size: clamp(2rem, 3.2vw, 2.8rem); margin-bottom: 12px; color: #FFFDF8;">
+        How Ginhawa Works: Client Care & Transparent Fair Pay
+      </h1>
+      <p style="color: rgba(255, 255, 255, 0.85); font-size: 1rem; line-height: 1.6;">
+        Built on mutual respect, rigorous qualification checks, and an open financial model where practitioners thrive.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content Container -->
+  <main class="container" style="padding: 64px 24px; max-width: 1040px;">
+
+    <!-- Section 1: Client Journey -->
+    <div style="margin-bottom: 64px;">
+      <span class="section-kicker">STEP-BY-STEP CLIENT JOURNEY</span>
+      <h2 class="section-title">From Aching Muscles to Complete Relief</h2>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 28px;">
+        
+        <div class="step-card">
+          <div class="step-number-bubble">1</div>
+          <h3 class="step-title">Select Service & Mode</h3>
+          <p class="step-desc">
+            Choose from 8 therapeutic categories. Select whether you prefer a Mobile Home Service or a partner wellness clinic visit.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number-bubble">2</div>
+          <div class="step-icon-wrap" style="font-size: 1.4rem;">
+            <i class="fa-solid fa-user-doctor"></i>
+          </div>
+          <h3 class="step-title">Matched Practitioner</h3>
+          <p class="step-desc">
+            Review government-licensed therapists, verified client ratings, and specific clinical specialties.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number-bubble">3</div>
+          <div class="step-icon-wrap" style="font-size: 1.4rem;">
+            <i class="fa-solid fa-file-waveform"></i>
+          </div>
+          <h3 class="step-title">Health Screening</h3>
+          <p class="step-desc">
+            Declare physical contraindications (hypertension, pregnancy, bone fractures) to guarantee safe therapeutic touch.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number-bubble">4</div>
+          <div class="step-icon-wrap" style="font-size: 1.4rem;">
+            <i class="fa-solid fa-shield-heart"></i>
+          </div>
+          <h3 class="step-title">Treatment & Safety</h3>
+          <p class="step-desc">
+            Therapist arrives with sanitized linens, oils, and identification badge. Mutual completion verified upon session finish.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Section 2: Transparent Financial Architecture (Section 10 of Master Spec) -->
+    <div id="fees" style="background: #fff; border-radius: 20px; border: 1px solid var(--border-card); padding: 40px; box-shadow: var(--shadow-sm); margin-bottom: 64px;">
+      <span class="section-kicker">ETHICAL COMMERCE</span>
+      <h2 style="font-size: 1.8rem; color: var(--crimson-dark); margin-bottom: 12px;">The Transparent ₱1,000 Fee Breakdown</h2>
+      <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 28px;">
+        Unlike exploitative booking platforms, Ginhawa publishes its exact fee reconciliation. Here is how an illustrative ₱1,000 booking is divided to empower therapists:
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center;">
+        
+        <div style="background: var(--bg-canvas); border-radius: 14px; padding: 24px; border: 1px solid var(--border-subtle);">
+          <div style="display: flex; justify-content: space-between; padding-bottom: 12px; border-bottom: 2px solid var(--crimson-primary); margin-bottom: 12px;">
+            <strong style="color: var(--crimson-dark);">Component</strong>
+            <strong style="color: var(--crimson-dark);">Share / Amount</strong>
+          </div>
+          <div class="fee-row">
+            <span>Customer Gross Payment</span>
+            <strong>₱1,000.00</strong>
+          </div>
+          <div class="fee-row" style="color: #666;">
+            <span>Payment Gateway Processing (2%)</span>
+            <span>- ₱20.00</span>
+          </div>
+          <div class="fee-row" style="color: #666;">
+            <span>Illustrative Tax / VAT (12%)</span>
+            <span>- ₱120.00</span>
+          </div>
+          <div class="fee-row" style="color: #666;">
+            <span>Ginhawa Platform, Dispatch & Support (22%)</span>
+            <span>- ₱220.00</span>
+          </div>
+          <div class="fee-row total" style="color: #10B981;">
+            <span>Therapist Net Earnings Remaining</span>
+            <span>₱640.00</span>
+          </div>
+          <div style="margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--gold-border); font-size: 0.82rem; color: #8C6200;">
+            <i class="fa-solid fa-umbrella" style="margin-right: 4px;"></i>
+            <strong>Welfare Fund Accrual:</strong> +₱50 per qualifying session credited toward therapist cycle insurance target.
+          </div>
+        </div>
+
+        <div>
+          <h4 style="font-size: 1.1rem; color: var(--crimson-dark); margin-bottom: 10px;">Why We Protect Therapist Earnings</h4>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 14px;">
+            High-quality therapy requires energized, well-compensated, and insured practitioners. 
+          </p>
+          <ul style="font-size: 0.85rem; color: #555; display: flex; flex-direction: column; gap: 8px; list-style-position: inside;">
+            <li>Zero hidden deduction penalties.</li>
+            <li>Direct payouts transferred weekly via InstaPay or GCash.</li>
+            <li>Accumulated Welfare Fund pays for medical & liability coverage.</li>
+            <li>Audited double-entry financial ledger prevents payment disputes.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Section 3: Cancellation, Reschedule & Safety Guarantees -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+      <div style="background: #fff; padding: 32px; border-radius: 16px; border: 1px solid var(--border-subtle);">
+        <h3 style="font-size: 1.2rem; color: var(--crimson-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <i class="fa-regular fa-clock" style="color: var(--gold-dark);"></i> Cancellation & Rescheduling
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 12px;">
+          <strong>Up to 2 hours before appointment:</strong> 100% free reschedule or full credit refund.
+        </p>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55;">
+          <strong>Within 2 hours of home appointment:</strong> A ₱250 therapist travel stipend is retained if the practitioner is already en route.
+        </p>
+      </div>
+
+      <div style="background: #fff; padding: 32px; border-radius: 16px; border: 1px solid var(--border-subtle);">
+        <h3 style="font-size: 1.2rem; color: var(--crimson-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-lock" style="color: var(--crimson-primary);"></i> Data Privacy Act (RA 10173)
+        </h3>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55; margin-bottom: 12px;">
+          Your address, phone number, and medical screening answers are encrypted and revealed to your assigned therapist only 1 hour prior to session start.
+        </p>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.55;">
+          Personal health details are strictly confidential and automatically archived after service completion.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom-row" style="border:none; padding-top:0;">
+        <div>&copy; 2026 Ginhawa App. Certified Wellness Platform.</div>
+        <div style="display:flex; gap:16px;">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="safety.html">Safety Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Tab Navigation -->
+  <nav class="mobile-tab-bar">
+    <div class="tab-bar-grid">
+      <a href="index.html" class="tab-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+      <a href="services.html" class="tab-item"><i class="fa-solid fa-compass"></i><span>Explore</span></a>
+      <a href="javascript:void(0)" class="tab-item" onclick="openBookingModal()"><i class="fa-solid fa-calendar-plus" style="color:var(--crimson-primary);"></i><span>Book</span></a>
+      <a href="safety.html" class="tab-item"><i class="fa-solid fa-shield-halved"></i><span>Safety</span></a>
+      <a href="therapist-portal.html" class="tab-item"><i class="fa-solid fa-user"></i><span>Portal</span></a>
+    </div>
+  </nav>
+
+  <!-- Include App Modal & Script -->
+  <div id="booking-modal-overlay" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="modal-title">Book Ginhawa Appointment</h3>
+        <button id="booking-modal-close" class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-stepper">
+          <div class="step-indicator active" id="step-indicator-1"><span class="step-dot">1</span><span>Service</span></div>
+          <div class="step-indicator" id="step-indicator-2"><span class="step-dot">2</span><span>Schedule</span></div>
+          <div class="step-indicator" id="step-indicator-3"><span class="step-dot">3</span><span>Screening</span></div>
+          <div class="step-indicator" id="step-indicator-4"><span class="step-dot">4</span><span>Review</span></div>
+        </div>
+        <div id="modal-step-content"></div>
+        <div style="display:flex; justify-content:space-between; margin-top:20px; border-top:1px solid #eee; padding-top:16px;">
+          <button id="modal-btn-prev" type="button" class="btn-outline-gold" style="display:none; padding:8px 18px;">Back</button>
+          <div style="margin-left:auto;">
+            <button id="modal-btn-next" type="button" class="btn-signup">Continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>

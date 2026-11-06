@@ -1,0 +1,24 @@
+{
+  "name": "Ginhawa App — Professional Care & Natural Healing",
+  "short_name": "Ginhawa",
+  "description": "Book certified and verified therapists for massage therapy, pain relief, body alignment, and home wellness services across the Philippines.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#FAF8F5",
+  "theme_color": "#580B15",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

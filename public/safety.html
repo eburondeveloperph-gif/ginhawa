@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Safety & Compliance Center — Ginhawa App</title>
+  <meta name="description" content="Ginhawa App safety protocols, zero-tolerance misconduct policies, emergency reporting, and therapist welfare insurance monitoring." />
+  
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-lockup">
+        <img src="assets/logo.jpg" alt="Ginhawa Emblem" class="brand-emblem" />
+        <div class="brand-text">
+          <span class="brand-title">GINHAWA</span>
+          <span class="brand-sub">A P P</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="therapists.html" class="nav-link">Therapists</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+        <a href="safety.html" class="nav-link active">Safety & Compliance</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button onclick="openSafetyModal()" style="background:#B82537; color:#fff; padding:8px 16px; border-radius:8px; font-weight:700; font-size:0.85rem; display:flex; align-items:center; gap:6px;">
+          <i class="fa-solid fa-triangle-exclamation"></i> Report Concern
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section style="background: radial-gradient(circle at 80% 20%, #580B15, #290408); color: #fff; padding: 56px 0; border-bottom: 2px solid rgba(212, 175, 55, 0.3);">
+    <div class="container" style="max-width: 860px; text-align: center;">
+      <span class="section-kicker" style="color: var(--gold-light);">SAFETY CHARTER & INTEGRITY CONTROLS</span>
+      <h1 style="font-size: clamp(2rem, 3.2vw, 2.8rem); margin-bottom: 12px; color: #FFFDF8;">
+        Ginhawa Safety, Boundaries & Compliance
+      </h1>
+      <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; line-height: 1.6;">
+        Professional touch requires absolute physical safety, strict professional boundaries, and transparent reporting channels for clients and therapists alike.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Safety Grid -->
+  <main class="container" style="padding: 64px 24px; max-width: 1100px;">
+    
+    <!-- 4 Pillar Safety Matrix -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-bottom: 56px;">
+      
+      <div class="trust-pillar-card" style="padding: 24px;">
+        <div class="pillar-icon-box" style="background:#FEE2E2; color:#991B1B; border-color:#FCA5A5;">
+          <i class="fa-solid fa-handshake-slash"></i>
+        </div>
+        <h3 class="pillar-title">Zero Misconduct Policy</h3>
+        <p class="pillar-desc">
+          Strict zero-tolerance for any sexual solicitation, non-clinical touch, harassment, or verbal abuse from either client or therapist. Immediate account suspension upon verified report.
+        </p>
+      </div>
+
+      <div class="trust-pillar-card" style="padding: 24px;">
+        <div class="pillar-icon-box" style="background:#D1FAE5; color:#065F46; border-color:#6EE7B7;">
+          <i class="fa-solid fa-address-card"></i>
+        </div>
+        <h3 class="pillar-title">DOH & PRC Verification</h3>
+        <p class="pillar-desc">
+          Only therapists with verified Department of Health (DOH) massage licenses, PRC physical therapy registration, or TESDA NC-II certificates are permitted to accept sessions.
+        </p>
+      </div>
+
+      <div class="trust-pillar-card" style="padding: 24px;">
+        <div class="pillar-icon-box" style="background:#FEF3C7; color:#92400E; border-color:#FCD34D;">
+          <i class="fa-solid fa-location-crosshairs"></i>
+        </div>
+        <h3 class="pillar-title">Real-Time Dispatch Check-in</h3>
+        <p class="pillar-desc">
+          Home service appointments require dual GPS arrival and completion check-ins, allowing our 24/7 Safety Dispatch to monitor session timelines.
+        </p>
+      </div>
+
+      <div class="trust-pillar-card" style="padding: 24px;">
+        <div class="pillar-icon-box" style="background:#EDE9FE; color:#5B21B6; border-color:#C4B5FD;">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <h3 class="pillar-title">Therapist Welfare Fund</h3>
+        <p class="pillar-desc">
+          ₱50 accumulated per qualifying session builds the therapist's medical, personal accident, and professional liability insurance coverage (target ₱3,500/cycle).
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Active Incident Triage & Reporting Section -->
+    <div style="background: #fff; border-radius: 20px; border: 1px solid var(--border-card); padding: 40px; box-shadow: var(--shadow-sm); margin-bottom: 56px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+        <div>
+          <span class="section-kicker">INCIDENT INVESTIGATION WORKFLOW</span>
+          <h2 style="font-size: 1.6rem; color: var(--crimson-dark); margin: 4px 0;">Confidential Case Intake & Response</h2>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">
+            Every submission is encrypted, assigned a unique Case ID, and routed to an on-duty Compliance Officer.
+          </p>
+        </div>
+        <button onclick="openSafetyModal()" class="btn-signup" style="background: #B82537; padding: 12px 24px;">
+          <i class="fa-solid fa-file-pen" style="margin-right: 6px;"></i> File New Incident Report
+        </button>
+      </div>
+
+      <!-- Severity Levels Table -->
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: left;">
+          <thead>
+            <tr style="background: var(--bg-surface-subtle); border-bottom: 2px solid var(--border-subtle);">
+              <th style="padding: 12px 16px; color: var(--crimson-dark);">Severity Level</th>
+              <th style="padding: 12px 16px; color: var(--crimson-dark);">Example Triggers</th>
+              <th style="padding: 12px 16px; color: var(--crimson-dark);">Operational SLA</th>
+              <th style="padding: 12px 16px; color: var(--crimson-dark);">Immediate Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border-subtle);">
+              <td style="padding: 14px 16px; font-weight: 700; color: #991B1B;">
+                <span style="background: #FEE2E2; padding: 3px 8px; border-radius: 4px;">CRITICAL</span>
+              </td>
+              <td style="padding: 14px 16px;">Physical endangerment, sexual misconduct, intoxication, assault</td>
+              <td style="padding: 14px 16px; font-weight: 600;">Immediate (&le; 15 mins)</td>
+              <td style="padding: 14px 16px; color: #991B1B;">Immediate profile suspension + emergency law enforcement liaison</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-subtle);">
+              <td style="padding: 14px 16px; font-weight: 700; color: #C2410C;">
+                <span style="background: #FFEDD5; padding: 3px 8px; border-radius: 4px;">HIGH</span>
+              </td>
+              <td style="padding: 14px 16px;">Verbal harassment, boundary violation, unapproved guest in room</td>
+              <td style="padding: 14px 16px; font-weight: 600;">&le; 4 Hours</td>
+              <td style="padding: 14px 16px;">Temporary booking hold + recorded interview of both parties</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-subtle);">
+              <td style="padding: 14px 16px; font-weight: 700; color: #854D0E;">
+                <span style="background: #FEF9C3; padding: 3px 8px; border-radius: 4px;">MODERATE</span>
+              </td>
+              <td style="padding: 14px 16px;">Excessive lateness (>30m), hygiene/sanitation lapse, rate dispute</td>
+              <td style="padding: 14px 16px; font-weight: 600;">&le; 24 Hours</td>
+              <td style="padding: 14px 16px;">Customer service resolution + retraining notation on profile</td>
+            </tr>
+            <tr>
+              <td style="padding: 14px 16px; font-weight: 700; color: #374151;">
+                <span style="background: #F3F4F6; padding: 3px 8px; border-radius: 4px;">LOW</span>
+              </td>
+              <td style="padding: 14px 16px;">Feedback on pressure intensity, app navigation suggestion</td>
+              <td style="padding: 14px 16px; font-weight: 600;">&le; 48 Hours</td>
+              <td style="padding: 14px 16px;">Operational logging + practitioner feedback report</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Emergency Hotline Banner -->
+    <div style="background: linear-gradient(135deg, #78101E 0%, #38040B 100%); color: #fff; padding: 32px; border-radius: 18px; border: 1px solid rgba(212, 175, 55, 0.4); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+      <div>
+        <h3 style="font-size: 1.35rem; color: var(--gold-light); margin-bottom: 6px;">24/7 Ginhawa Safety & Dispatch Hotline</h3>
+        <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.85);">
+          Live voice escalation staffed around the clock by certified medical and security personnel.
+        </p>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <a href="tel:+63288884464" style="background: #fff; color: var(--crimson-dark); padding: 12px 24px; border-radius: 10px; font-weight: 800; font-size: 1rem; display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-phone-volume" style="color: var(--crimson-primary);"></i> (02) 8888-GINH
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom-row" style="border:none; padding-top:0;">
+        <div>&copy; 2026 Ginhawa App. Certified Wellness Platform.</div>
+        <div style="display:flex; gap:16px;">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="therapists.html">Therapists</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Tab Navigation -->
+  <nav class="mobile-tab-bar">
+    <div class="tab-bar-grid">
+      <a href="index.html" class="tab-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+      <a href="services.html" class="tab-item"><i class="fa-solid fa-compass"></i><span>Explore</span></a>
+      <a href="javascript:void(0)" class="tab-item" onclick="openBookingModal()"><i class="fa-solid fa-calendar-plus" style="color:var(--crimson-primary);"></i><span>Book</span></a>
+      <a href="safety.html" class="tab-item active"><i class="fa-solid fa-shield-halved"></i><span>Safety</span></a>
+      <a href="therapist-portal.html" class="tab-item"><i class="fa-solid fa-user"></i><span>Portal</span></a>
+    </div>
+  </nav>
+
+  <!-- Incident Modal -->
+  <div id="safety-modal-overlay" class="modal-overlay">
+    <div class="modal-dialog" style="max-width:520px;">
+      <div class="modal-header" style="background: linear-gradient(135deg, #78101E 0%, #38040B 100%);">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <i class="fa-solid fa-shield-halved" style="color:var(--gold-light);"></i>
+          <h3>Safety Incident & Concern Intake</h3>
+        </div>
+        <button onclick="closeSafetyModal()" class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="submitSafetyReport(event)">
+          <div class="form-group">
+            <label class="form-label">Category of Concern</label>
+            <select id="incident-category" class="form-select" required>
+              <option value="Professional Misconduct">Professional Misconduct / Boundary Breach</option>
+              <option value="Harassment / Unsafe Behavior">Harassment or Unsafe Behavior</option>
+              <option value="Attendance / Lateness">Attendance / Excessive Lateness</option>
+              <option value="Sanitation & Hygiene">Sanitation or Health Screening Issue</option>
+              <option value="Billing / Payment Dispute">Payment / Overcharge Dispute</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Triage Urgency</label>
+            <select id="incident-severity" class="form-select">
+              <option value="Low">Low (Informational / Feedback)</option>
+              <option value="Moderate" selected>Moderate (Within 24h Follow-up)</option>
+              <option value="High">High (Within 4h Investigation)</option>
+              <option value="Critical">Critical (Immediate Account Restriction)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Incident Description & Location Details</label>
+            <textarea class="form-textarea" rows="3" placeholder="Please describe details..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Phone Number</label>
+            <input type="tel" class="form-input" placeholder="+63 9XX XXX XXXX" required />
+          </div>
+          <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+            <button type="button" onclick="closeSafetyModal()" class="btn-outline-gold" style="padding:8px 16px;">Cancel</button>
+            <button type="submit" class="btn-signup" style="background:#B82537; padding:9px 20px;">Submit Confidential Report</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>

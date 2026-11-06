@@ -1,0 +1,425 @@
+# GINHAWA APP — MASTER DEVELOPMENT TODO
+
+**Product:** Ginhawa App — Professional Care. Natural Healing. A Better You.  
+**Delivery model:** One installable Progressive Web App (PWA), mobile-first, with separate role-based experiences and a shared backend.  
+**Status:** Planning backlog — no implementation is claimed by this document.  
+**Priority key:** `[P0]` mandatory for first production launch, `[P1]` next release, `[P2]` future enhancement.  
+**Legend:** `- [ ]` = not started; completion requires evidence and the listed acceptance criteria.
+
+> **Implementation directive:** Reproduce the product identity from the supplied Ginhawa references, not merely a generic booking template. Build working journeys end to end: UI → authenticated API → database → notifications/financial events → audit trail. Do not mark UI-only mocked flows complete. Preserve the reference business rules as configurable policy until the open decisions below are signed off.
+
+## 0. Scope, constraints and product decisions
+
+- [ ] **[P0]** Establish a single shared design system and domain model across Customer, Therapist, Operations, and Safety/Compliance portals.
+- [ ] **[P0]** Define Ginhawa's business entity, supported operating territory, booking times, cancellation/refund policy, support hours, emergency escalation process and terms.
+- [ ] **[P0]** Define whether each service is wellness-only, regulated medical/professional care, or a consultation. Never present medical licensure or treatment results without verified basis.
+- [ ] **[P0]** Approve therapist qualification matrix per service type, including what evidence is required for each verification badge.
+- [ ] **[P0]** Decide whether bookings are instantly confirmed or require therapist acceptance; state expiration and auto-reassignment rules.
+- [ ] **[P0]** Confirm operating mode for Home Service, on-premises service and Online Consultation, including travel buffers, addresses and coverage zones.
+- [ ] **[P0]** Finalize payment methods, merchant-of-record, gateway fees, payout schedule, taxation and invoice/receipt issuance.
+- [ ] **[P0]** Validate the example fee model (₱1,000 gross, 2% gateway, illustrative 12% tax, 22% Ginhawa commission, ₱640 remaining) with legal/accounting review before automating real transfers.
+- [ ] **[P0]** Decide whether the ₱50 insurance contribution is triggered by `confirmed`, `completed`, or `paid-and-settled` bookings; define reversal logic after a refund/chargeback.
+- [ ] **[P0]** Confirm insurer, policy holder, premium structure, legal classification of funds, claims workflow and whether statutory permissions/registrations are needed. Never label a therapist insured merely because ₱3,500 was accumulated.
+- [ ] **[P0]** Approve retention and deletion policies for sensitive identity files, screening data, reports and evidence.
+- [ ] **[P1]** Approve multilingual product copy (English/Filipino) and accessible language switching.
+
+### Minimum product acceptance
+
+A verified therapist can be discovered and booked by an authenticated customer; payment and booking state are synchronized; the therapist can fulfill the appointment; the final amounts can be reconciled; both participants can report concerns; authorized staff can resolve a case; all sensitive actions are auditable; and customers can install the PWA on supported phones.
+
+---
+
+## 1. Architecture and repository [P0]
+
+**Recommended stack (implementation proposal, not a requirement from the visual reference):** Next.js App Router + React + TypeScript, Tailwind CSS + shadcn/ui, PostgreSQL + Prisma, Redis for locks/queues, an object-storage provider with signed URLs, background job workers, a Philippine-supported payment gateway adapter, email/SMS providers and browser push where available. Build as a modular monolith first, with clean domain boundaries; extract services only when justified.
+
+- [ ] Initialize a version-controlled TypeScript repository; enable strict type checking, ESLint, Prettier and consistent imports.
+- [ ] Organize code by feature/domains: `auth`, `catalog`, `therapists`, `availability`, `bookings`, `payments`, `ledger`, `insurance`, `safety`, `compliance`, `notifications`, `admin`.
+- [ ] Separate server-only code from browser bundles; enforce environment-variable validation and secrets management.
+- [ ] Configure PostgreSQL migrations, seeds, indexes and transaction boundaries; no production `db push` without reviewed migrations.
+- [ ] Set up Redis-based slot holds, asynchronous jobs and retry-safe event processing.
+- [ ] Configure private object storage for identity documents and incident evidence; public storage only for explicitly public media.
+- [ ] Add API contracts and runtime validation (e.g. Zod), typed errors, pagination, rate limiting and idempotency keys.
+- [ ] Add staging and production environments with separate databases, storage, gateway credentials and domains.
+- [ ] Add CI checks for lint, typecheck, unit tests, migrations and production build before merge/deploy.
+- [ ] Add structured logs, error monitoring, tracing, alerting and non-sensitive metrics.
+- [ ] Document architectural decisions, environment setup, deploy steps, operational runbooks and rollback procedure.
+
+**Done when:** a new developer can run the app locally from documented steps, CI is green, and a protected sample route works against the real database.
+
+## 2. Design system and native-mobile UI [P0]
+
+### Brand foundation — based on the supplied images
+
+- [ ] Use the approved **Ginhawa** gold emblem and Ginhawa App wordmark at all touchpoints. Request the source/vector logo; do not treat an icon screenshot as production artwork.
+- [ ] Establish design tokens for **deep crimson**, **burgundy red**, **metallic gold**, **warm ivory**, readable near-black text and neutral backgrounds. Exact color tokens to be sampled/approved against source artwork.
+- [ ] Use elegant display serif for promotional headings and a legible sans-serif for inputs, prices, labels and body copy.
+- [ ] Reproduce the reference's therapy-focused hero image treatment, warm visual tone, rounded white search panel, gold-line icons and service imagery; use properly licensed/approved media.
+- [ ] Enforce WCAG AA text and control contrast; never use metallic gradients for small or essential text.
+- [ ] Create reusable components: app bar, logo, primary CTA, bottom tab bar, service card, therapist card, status chip, stepper, calendar, time slots, sheets, dialogs, toasts, skeletons, empty states and safe error states.
+- [ ] Implement touch-first UI: 44×44 CSS-pixel minimum interactive areas, thumb-friendly bottom actions, safe-area insets, appropriate keyboard behavior and no hover-only paths.
+- [ ] Apply mobile navigation transitions and app-style sheets without blocking browser back/forward or deep links.
+- [ ] Use responsive image loading, optimized WebP/AVIF where supported, typography scaling and reduced-motion support.
+- [ ] Support light appearance based on the supplied reference; dark mode is optional and should not degrade brand contrast.
+- [ ] Create design layouts at 320px, 360px, 390px, 430px, tablet and desktop widths.
+- [ ] On desktop, create a branded responsive marketing website and role-specific admin-style dashboards; do not stretch mobile cards into a desktop layout.
+
+### Public website layout
+
+- [ ] Header: Home, Services, Therapists, How It Works, Safety & Compliance, About, Contact, search, Login, Sign Up.
+- [ ] Hero: Ginhawa emblem/wordmark, headline **“Professional Care. Natural Healing. A Better You.”**, intro and prominent booking search.
+- [ ] Quick search form: **Select Location → Select Service → Select Date → Find a Therapist**; on mobile stack controls vertically.
+- [ ] Service shortcuts — eight categories from the image: **Massage Therapy, Muscle & Joint Care, Pain Relief, Body Alignment, Rehabilitation, Wellness Programs, Online Consultation, Home Service**.
+- [ ] Trust section: **Your Wellness Partner in Every Step**, with therapist verification, safe booking, client confidence and holistic care messaging.
+- [ ] How It Works: **Create an Account → Choose a Service → Book & Confirm → Receive Treatment**.
+- [ ] Add real footer, support, legal/policy navigation, responsive image cropping and SEO metadata.
+- [ ] Ensure claims such as “certified,” “verified,” “safe,” and “professional” correspond to real policies and checks.
+
+### Mobile app shells
+
+- [ ] Customer bottom navigation: **Home, Explore, Bookings, Safety, Profile**.
+- [ ] Therapist bottom navigation: **Dashboard, Requests, Calendar, Earnings, Profile**; Safety is always reachable from dashboard/menu.
+- [ ] Admin mobile experience: operational summary, alerts, approvals and case queues; detailed management optimized for desktop/tablet.
+- [ ] All shells: authenticated state, role switching only when authorized, notifications inbox, keyboard avoidance, offline banner and loading states.
+
+**Done when:** UI matches the reference's red/gold identity, works at mobile widths without horizontal scroll, and can be navigated by keyboard/screen reader.
+
+## 3. PWA and mobile capabilities [P0]
+
+- [ ] Implement `manifest.webmanifest` with correct name, short name, scope, start URL, theme/background colors, icon sizes 192/512, maskable icon and standalone display mode.
+- [ ] Configure a versioned service worker, safe cache expiration and controlled update prompt.
+- [ ] Provide an app install guide/onboarding for Android browsers and iOS Safari Add to Home Screen; do not assume identical install prompts.
+- [ ] Implement route-aware offline fallback for public/help/static assets and limited previously loaded non-sensitive data.
+- [ ] Never cache full payment pages, private evidence, therapist identity documents, financial statements, health screening details or sensitive API payloads in offline caches.
+- [ ] Prevent stale cached availability from being treated as bookable; booking and payment always require network/server confirmation.
+- [ ] Enable Web Push where browser/platform/user permission allows, with email/SMS fallback for critical booking notifications; iOS web push must be tested in its supported installed-app context.
+- [ ] Handle permission denial, revoked permissions, background restrictions and devices without push support.
+- [ ] Handle deep links into booking, receipt, profile, support and incident status screens.
+- [ ] Show explicit offline/online connectivity and a retry button; avoid background financial transactions or unreviewed offline writes.
+- [ ] Test install, updates, notifications and restored sessions on current Android Chrome and iOS Safari/Home Screen contexts.
+
+**Done when:** installation, launch, navigation, reconnect and push fallback work on physical Android and iPhone devices.
+
+## 4. Authentication, authorization and onboarding [P0]
+
+- [ ] Build customer sign-up/login with email or mobile verification, secure recovery and session management.
+- [ ] Build therapist registration and verification-specific onboarding; separate unverified profiles from bookable accounts.
+- [ ] Build invitation-based staff accounts and permission-scoped administrator access.
+- [ ] Set up server-enforced RBAC for: Customer, Therapist, Customer Support, Verification Officer, Compliance Officer, Safety Officer, Finance Officer, Insurance Administrator, Auditor and Super Admin.
+- [ ] Deny-by-default all API routes; do not rely on hidden UI controls for authorization.
+- [ ] Enforce owner-scoped access and role-specific field filtering, including for exports, search, files and websocket events.
+- [ ] Use strong session-cookie protection, CSRF controls where needed, rotation/revocation and rate limiting.
+- [ ] Require step-up authentication for high-risk admin actions, payment account changes and sensitive case access where appropriate.
+- [ ] Capture terms/privacy consent with version, timestamp and evidence of acceptance.
+- [ ] Build account settings: profile, password/recovery, sign out from devices, notifications, privacy requests and account closure workflow.
+- [ ] Seed demo accounts with fake data only; never ship test users/passwords to production.
+
+**Done when:** unauthorized users cannot read or mutate bookings, payouts or safety records across accounts/roles.
+
+## 5. Service catalog, search and therapist directory [P0]
+
+- [ ] Create service categories and service records with description, duration, scope, allowed practitioner qualifications, images, service mode, base pricing and active status.
+- [ ] Provide admin CRUD for service offerings, location coverage and policy copy.
+- [ ] Build searchable service directory with filters for category, service mode, location, date, price range and availability.
+- [ ] Build therapist directory populated only with currently eligible/bookable therapists.
+- [ ] Display therapist name, approved public photo, specialties, service rates, allowed locations, schedule, verified attributes and relevant reviews.
+- [ ] Build therapist profile detail page with credential badges tied to approved records (not uploaded files alone), offerings, pricing, reviews and **Book Now** CTA.
+- [ ] Display unavailability honestly; suggest alternate dates, therapists or service modes without manufacturing time slots.
+- [ ] Add canonical URLs, metadata and structured data only for public non-sensitive profiles/services.
+
+**Done when:** location + service + date search returns only eligible therapists and real server-generated slots.
+
+## 6. Therapist registration, verification and onboarding [P0]
+
+- [ ] Build registration wizard: identity/contact, photo, service categories, experience, service areas, bank/payout details and required agreements.
+- [ ] Add upload flows for ID, certifications, licenses when applicable, proof of qualification and supporting documents.
+- [ ] Securely scan, store, review and expire documents; do not expose raw private documents through public URLs.
+- [ ] Implement states: `DRAFT`, `PENDING_VERIFICATION`, `DOCUMENTS_REQUIRED`, `UNDER_REVIEW`, `VERIFIED`, `RESTRICTED`, `SUSPENDED`, `DEACTIVATED`.
+- [ ] Build verification officer review queue with checklist, comments, change requests, approval/rejection, time stamps and audit logs.
+- [ ] Track credential expiration by credential type; block new bookings when a required credential is invalid or an active restriction forbids acceptance.
+- [ ] Add safety training completion, code-of-conduct agreement and eligibility checks before activation.
+- [ ] Allow therapist to resubmit requested documents and view next steps/verification history.
+- [ ] Send status update notifications with no confidential internal rationale exposed unnecessarily.
+
+**Done when:** only a therapist with verified, unexpired qualifications and no booking-prohibiting restrictions can publish available slots.
+
+## 7. Availability and scheduling engine [P0]
+
+- [ ] Model therapist working hours, service durations, blackout dates, time off, travel buffers and home-service coverage boundaries.
+- [ ] Generate slots with timezone `Asia/Manila` for display; store timestamps unambiguously in UTC.
+- [ ] Add recurring weekly schedules and date-specific overrides, including holidays if configured.
+- [ ] Implement atomic, expiring slot holds during checkout (e.g. database constraint + transaction; Redis may assist, not replace consistency).
+- [ ] Prevent overlapping bookings for the same therapist and time, including concurrent payment attempts.
+- [ ] Release holds after checkout expiry/cancellation, and reconcile abandoned holds.
+- [ ] Provide separate service location handling for home visit, clinic/partner venue and online consultation.
+- [ ] Expose an audited reschedule workflow with customer/therapist notifications and policy checks.
+- [ ] Create admin controls to view calendars, reassign bookings with permission and manage exceptions.
+
+**Done when:** two devices racing to book the same therapist and slot produce at most one successful booking.
+
+## 8. Customer booking journey [P0]
+
+- [ ] Implement: Home/Search → Choose Service → Choose Therapist → Date/Time → Location/Mode → Health & Safety Screening → Price Review → Checkout → Confirmation.
+- [ ] Require sign-in at a sensible step while preserving pre-login search selections.
+- [ ] Show complete pricing breakdown, duration, address/online instructions, cancellation policy and booking terms before payment.
+- [ ] Gather only minimum screening information necessary for the service; add clinician review/referral guardrails when medically appropriate.
+- [ ] Provide informed consent, safety guidelines and a clear way to ask a question or report a concern.
+- [ ] Provide address autocomplete or manual address entry; validate service coverage before final confirmation.
+- [ ] Record a unique booking number, status history, consent policy version and checkout quote snapshot.
+- [ ] Implement lifecycle with explicit transitions: `DRAFT`, `HOLD`, `AWAITING_PAYMENT`, `AWAITING_THERAPIST`, `CONFIRMED`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`, `REFUND_PENDING`, `REFUNDED`, `DISPUTED`; final approved transitions depend on the confirmed acceptance model.
+- [ ] Build **My Bookings** tabs: Upcoming, Active, Completed, Cancelled; each with detail, support, cancel/reschedule and receipt links as appropriate.
+- [ ] Send customer and therapist confirmation/changes via in-app and fallback channels.
+- [ ] Add cancellation, no-show, delayed start, partial refund and failed-booking recovery flows.
+
+**Done when:** a user can complete a real booking from a phone, reload the page, and still see accurate synchronized status.
+
+## 9. Therapist daily operations [P0]
+
+- [ ] Build dashboard with today's bookings, pending requests, availability and essential alerts.
+- [ ] Build booking request detail with only the minimum customer details needed for service fulfillment.
+- [ ] Implement accept/decline actions when required by product policy; enforce deadlines and timeout handling.
+- [ ] Build calendar day/week views, time-off requests and service availability editor.
+- [ ] Add appointment preparation instructions, arrival/start confirmation and customer safety confirmation.
+- [ ] Implement session start/end with mutual completion confirmation and mismatch handling.
+- [ ] Provide support/escalation for customer misconduct, unsuitable service, address issues or emergencies.
+- [ ] Show earnings, pending payout, completed payout, deductions, disputes and fund contributions from reconciled ledger records.
+- [ ] Allow banking/payout detail updates using strong verification and appropriate provider controls.
+- [ ] Provide compliance status, credential expirations, safety training, appeals and support pages.
+
+**Done when:** therapist can manage the complete booking/session lifecycle without using an admin interface.
+
+## 10. Payments, money movement and financial ledger [P0]
+
+- [ ] Integrate a production-approved Philippine-compatible payment provider behind a payment adapter; evaluate actual support for cards, e-wallets and bank methods.
+- [ ] Create server-side checkout sessions; never trust amount or commission calculated in the browser.
+- [ ] Verify signed gateway webhooks, reconcile provider event IDs and enforce idempotent payment updates.
+- [ ] Add retry, timeout, abandoned payment, duplicate webhook, unknown status and chargeback workflows.
+- [ ] Use an immutable/append-only double-entry or equivalent auditable financial ledger with offsetting corrections, not silent balance edits.
+- [ ] Record gross price, discounts, service charge, gateway fee, tax components, commission, therapist share, insurance contribution and net payout as **separate configurable fields**.
+- [ ] Display the provided **illustrative** ₱1,000 example for stakeholder review: gateway fee ₱20, assumed tax ₱120, Ginhawa commission ₱220, amount remaining ₱640; flag tax/fee treatment as not approved.
+- [ ] Clarify whether the ₱50 insurance contribution is additional to the ₱640 remaining: if deducted from that share, the illustrative transfer would be ₱590, **but only after policy approval**.
+- [ ] Implement payout eligibility conditions, hold periods, provider settlement reconciliation, payout batch approval and payment status tracing.
+- [ ] Build refund calculations respecting policy, payment provider fees, insurance reversal rules and fiscal documentation.
+- [ ] Add receipts, downloadable invoice/statement data where legally required, reconciliation reports and export permissions.
+- [ ] Restrict financial data to parties and staff with a legitimate need; audit every manual adjustment/refund/override.
+
+**Done when:** every booking can be traced from customer charge through gateway fees, taxes, commission, fund contribution and therapist settlement without unreconciled balances.
+
+## 11. Therapist insurance contribution and coverage administration [P0 for ledger; policy-dependent for collection]
+
+- [ ] Parameterize the proposed **₱50 per qualifying booking** contribution, **70 qualifying bookings** and **₱3,500 target per cycle**.
+- [ ] Resolve the booking qualification trigger and refund/chargeback reversals before enabling deductions.
+- [ ] Create one and only one contribution entry per qualifying booking and fund cycle (enforce unique constraint/idempotency).
+- [ ] Implement fund-cycle states: `FUND_ACCUMULATING`, `THRESHOLD_REACHED`, `ADMIN_REVIEW`, `INSURER_CONFIRMATION_PENDING`, `COVERAGE_CONFIRMED`, `RENEWAL_PENDING`, `COVERAGE_EXPIRED`.
+- [ ] Show contributions and coverage status separately in the therapist dashboard; avoid conflating **fund balance** with **active insurance coverage**.
+- [ ] Build Insurance Administrator review, renewal, insurer policy reference, effective dates, premium records and insurer-confirmation evidence.
+- [ ] Block displays of `Covered/Insured` unless insurer-confirmed records are present and the effective date has not expired.
+- [ ] Implement policy-change versioning, manual adjustment approvals, payout reconciliation and auditable reversal entries.
+- [ ] Set up alerts for threshold reached, pending review, renewal window and expired insurer-confirmed coverage.
+- [ ] Document claims/contact process based on confirmed insurer terms and avoid representing the ₱3,500 contribution target as a benefit amount.
+
+**Done when:** the ledger has no duplicated contributions and the UI distinguishes fund progress from legally effective coverage.
+
+## 12. Safety & Compliance: integrated controls [P0]
+
+- [ ] Embed safety and verification checks in all booking transitions, not as a disconnected dashboard.
+- [ ] Validate therapist status, required credentials and active restrictions at search, checkout and pre-session steps.
+- [ ] Show user-facing safety guidelines, professional boundaries, rights, complaint channels and emergency guidance.
+- [ ] Provide pre-session checks to both participants: participant identity, agreed service/price, location, consent and safety concerns.
+- [ ] Implement optional session check-in and **Report a Concern** action during an appointment.
+- [ ] Route missed check-ins to proportionate follow-up; never auto-label someone guilty or automatically suspend based only on a missed check-in.
+- [ ] Create Safety Officer real-time queue with active safety alerts, unreviewed incidents and assigned urgent cases.
+- [ ] Provide a prominent emergency instructions/action page; urgent threats must not depend on staff being online to contact emergency responders.
+- [ ] Build confidentiality boundaries so Customer Support and general Admin users cannot browse private safety evidence.
+- [ ] Maintain searchable, immutable access logs for every sensitive case read/export and mutation.
+
+**Done when:** an ineligible therapist is rejected before booking and urgent incidents reach the correct safety queue with audited access.
+
+## 13. Incident reporting, investigations and appeals [P0]
+
+- [ ] Allow both customers and therapists to report incidents with or without a linked booking where policy allows.
+- [ ] Implement categories: harassment, sexual misconduct, physical safety, professional misconduct, customer misconduct, fraud, privacy violation, payment dispute, service complaint and emergency.
+- [ ] Support severity levels `LOW`, `MODERATE`, `HIGH`, `CRITICAL` for operational triage—not a legal or guilt determination.
+- [ ] Capture unique case ID, booking ID, reporter/respondent, category, dates, severity, description, evidence, investigator, findings, actions, appeal and closure date.
+- [ ] Encrypt/store private case evidence with signed short-lived access URLs and strict case-by-case permissions; add malware scanning.
+- [ ] Build workflow: `SUBMITTED → TRIAGED → ASSIGNED → INVESTIGATING → FINDING_RECORDED → ACTION_OR_CLOSURE → APPEAL_WINDOW → CLOSED` (branching/reopening allowed by policy).
+- [ ] Implement emergency escalation that presents immediate help instructions and alerts the relevant safety staff.
+- [ ] Build investigator assignment, deadlines, evidence notes, interviews/statements, conflict-of-interest controls and review checklists.
+- [ ] Build disciplinary options: education, warning, training, restriction, temporary suspension and permanent deactivation based on documented policy and human review.
+- [ ] Support respondent notice, accessible appeal submission, independent reviewer assignment and final decision logging.
+- [ ] Ensure report flags/volume are never sole proof of misconduct or sole basis for automatic permanent bans.
+- [ ] Support anonymous/private user-facing reports where policy permits, with clear limits on follow-up and evidence.
+- [ ] Provide reporter-facing status that hides confidential evidence, investigation deliberations and third-party private data.
+- [ ] Add incident trend reports and fully permissioned exports with case identifier redaction by audience.
+
+**Done when:** an end-to-end incident can be submitted, triaged, investigated, resolved, appealed and audited without leaking evidence to other users or staff roles.
+
+## 14. Operations, Finance and Compliance dashboards [P0]
+
+- [ ] Admin overview KPIs: completed/active bookings, booking conversion, verified therapists, pending verification, open incidents, disputes, receipts, payouts and unresolved anomalies.
+- [ ] Customer management with limited support-visible personal data and activity history, governed by permissions.
+- [ ] Therapist management: onboarding, verification, restrictions, schedules, coverage and service eligibility.
+- [ ] Booking operations: lookup, rebooking/reschedule, issue resolution and annotated overrides.
+- [ ] Service catalog, categories, prices, coverage zones, marketing content and approved policy management.
+- [ ] Finance: collections, gateway reconciliation, commission, refunds, disputes, payouts and tax configuration.
+- [ ] Insurance admin: contribution totals, cycle status, insurer confirmations, renewals, adjustments and discrepancy reports.
+- [ ] Compliance: credentials near expiration, training completion, blocked booking attempts, cases and audit anomalies.
+- [ ] Investigations: case queues, evidence access control, investigators, severity, outcomes and appeals.
+- [ ] Analytics: cohort/funnel by service and zone, therapist utilization, cancellation/refund rates, time to verification and incident resolution SLAs.
+- [ ] Provide role-based dashboard widgets, reporting filters, pagination, export permission and server-side authorization for every action.
+- [ ] Apply maker/checker approval for sensitive high-value refunds, financial overrides and critical account restrictions where approved.
+
+**Done when:** every admin view draws real aggregates from permission-scoped database queries, with no mock metrics in production.
+
+## 15. Notifications, customer support and content [P0/P1]
+
+- [ ] **[P0]** Create notification templates for verification, booking hold/payment, confirmation, rejection, reschedule, session reminder, completion, refund and dispute status.
+- [ ] **[P0]** Create urgent safety escalation templates with privacy-preserving notification previews.
+- [ ] **[P0]** Send via in-app inbox and selected email/SMS provider; use Web Push only after consent and capability check.
+- [ ] **[P0]** Use async jobs for messages; retries/backoff/dead-letter queue; prevent duplicate sends with event IDs.
+- [ ] **[P0]** Respect quiet hours where appropriate, but do not suppress genuinely urgent safety instructions.
+- [ ] **[P0]** Add help center, support request form, policy pages, contact channels and configurable FAQ.
+- [ ] **[P1]** Add accessible bilingual copy and localization of dates/currency as needed.
+- [ ] **[P1]** Add secure, narrowly scoped customer-therapist messaging with moderation/report controls.
+- [ ] **[P1]** Add verified-post-session reviews and rating moderation without suppressing legitimate negative feedback.
+- [ ] **[P2]** Add loyalty/referrals/promo codes and sophisticated personalization only after booking operations are stable.
+
+## 16. Required database domains [P0]
+
+Implement these as normalized PostgreSQL entities with named enums, foreign keys, indexes, migrations, soft-delete/retention rules as appropriate and strong row-level authorization at the API/business layer; database row-level security may provide extra defense.
+
+- [ ] Identity: `users`, `sessions`, `user_roles`, `customer_profiles`, `therapist_profiles`, `staff_members`, `consents`.
+- [ ] Therapist verification: `therapist_credentials`, `verification_reviews`, `credential_types`, `safety_training`, `account_restrictions`.
+- [ ] Catalog/geo: `service_categories`, `services`, `therapist_services`, `service_areas`, `addresses`, `venues`.
+- [ ] Scheduling: `availability_rules`, `availability_exceptions`, `slot_holds`, `calendar_events`.
+- [ ] Booking: `bookings`, `booking_status_events`, `booking_safety_checks`, `session_events`, `booking_adjustments`.
+- [ ] Financial: `payment_intents`, `payments`, `gateway_events`, `ledger_accounts`, `ledger_entries`, `refunds`, `chargebacks`, `therapist_payouts`, `payout_batches`, `fee_rules`, `tax_rules`.
+- [ ] Insurance: `insurance_fund_ledger`, `insurance_policy_cycles`, `insurer_confirmations`, `coverage_documents`.
+- [ ] Safety: `incident_reports`, `incident_evidence`, `investigation_cases`, `case_assignments`, `case_notes`, `disciplinary_actions`, `appeals`, `compliance_requirements`, `compliance_records`.
+- [ ] Support/ops: `notifications`, `notification_deliveries`, `support_tickets`, `reviews`, `audit_logs`, `system_settings`.
+- [ ] Add unique constraints to booking IDs, case IDs, gateway event IDs and contribution-per-booking keys.
+- [ ] Add immutable provenance fields: initiator, creation, policy version, supporting evidence reference and adjustment reason.
+- [ ] Keep personal/health/safety records separate from public profile/search projections.
+
+## 17. Suggested route map and API boundaries [P0]
+
+**Public/PWA pages:** `/`, `/services`, `/services/[slug]`, `/therapists`, `/therapists/[id]`, `/how-it-works`, `/safety`, `/about`, `/contact`, `/login`, `/register`.
+
+**Customer:** `/app`, `/app/search`, `/app/book/[serviceId]`, `/app/checkout/[bookingId]`, `/app/bookings`, `/app/bookings/[id]`, `/app/payments`, `/app/report`, `/app/safety`, `/app/profile`, `/app/support`, `/app/privacy`.
+
+**Therapist:** `/therapist/onboarding`, `/therapist/dashboard`, `/therapist/requests`, `/therapist/calendar`, `/therapist/bookings/[id]`, `/therapist/earnings`, `/therapist/insurance`, `/therapist/verification`, `/therapist/safety`, `/therapist/support`.
+
+**Admin:** `/admin`, `/admin/customers`, `/admin/therapists`, `/admin/bookings`, `/admin/services`, `/admin/finance`, `/admin/insurance`, `/admin/compliance`, `/admin/safety`, `/admin/safety/cases/[id]`, `/admin/audit`, `/admin/reports`, `/admin/settings`.
+
+- [ ] Separate customer-facing read models from confidential administrator queries.
+- [ ] Version API contracts (`/api/v1/...`) when external integrations may be introduced.
+- [ ] Generate typed input/output schemas and OpenAPI docs for key endpoints.
+- [ ] Implement idempotency, conditional updates and optimistic concurrency at payment, booking and case-state transitions.
+- [ ] Enforce signed upload/download authorization at the API, not merely by obscuring object names.
+- [ ] Ensure API errors have safe user messages and server-side correlation IDs; do not leak identity documents or internal decisions.
+
+## 18. Security, privacy, policy and regulatory readiness [P0]
+
+- [ ] Complete threat model for payments, fake therapist identities, harassment, account takeovers, forged webhooks, IDOR and evidence exfiltration.
+- [ ] Assess compliance with the Philippine Data Privacy Act (RA 10173) and applicable laws for safety, platform commerce and specific offered services; obtain counsel review of actual applicability.
+- [ ] Create legally reviewed terms, privacy notice, therapist contract, consumer policy, incident/appeal process and insurance terms.
+- [ ] Identify the data controller/processors, purposes, legal bases/consent, privacy officer/contact, breach-response process and applicable reporting duties.
+- [ ] Enforce TLS, security headers/CSP, encryption at rest, strict secret rotation, backups and least-privilege infrastructure credentials.
+- [ ] Add file-size/type validation, anti-malware checks, content moderation and private signed URL expiration.
+- [ ] Add abuse prevention: CAPTCHA/rate limiting where useful, suspicious-login monitoring and webhook replay defense.
+- [ ] Restrict health screening, identity documents and incident evidence to explicitly justified processing purposes.
+- [ ] Build user access, correction, deletion/retention and consent management workflows, subject to legally required preservation.
+- [ ] Make audit logs tamper-resistant and access controlled; prevent mutation through regular admin functions.
+- [ ] Security test cross-role account data access, public URLs, PWA caches and browser storage for sensitive data.
+
+## 19. Testing, QA and performance [P0]
+
+- [ ] Unit-test price calculations, insurance fund rules, eligibility checks, scheduling overlap, status transitions and permission policy.
+- [ ] Integration-test database transactions, gateway webhook deduplication, refunds/payouts, policy versioning, notifications and evidence storage.
+- [ ] End-to-end test customer registration → search → booking → checkout → confirmation → completion → receipt.
+- [ ] End-to-end test therapist registration → document upload → approval → published availability → session → payout.
+- [ ] End-to-end test complaint → severity triage → investigator → decision → appeal → closure.
+- [ ] Concurrency test simultaneous booking requests for one slot and repeated gateway callbacks; confirm no double charge/contribution.
+- [ ] Test failed/late webhooks, expiry after checkout, therapist suspension between search/payment and rollback/recovery.
+- [ ] Test Safari on iOS Home Screen, Android Chrome installed PWA, desktop Chrome/Edge/Firefox/Safari, touch keyboards, safe areas and push behavior.
+- [ ] Test offline/reconnect: no payment offline, no stale slot reservations, no confidential cached content.
+- [ ] Run automated accessibility audit (WCAG AA target), keyboard navigation, screen-reader smoke tests and color contrast validation.
+- [ ] Budget targets: good Core Web Vitals on representative mobile connections; define LCP, INP, CLS thresholds in CI monitoring.
+- [ ] Perform security review/pentest for authz, IDOR, private file leaks, payment replay and staff overreach before real-money rollout.
+- [ ] Run disaster recovery and database restore drill; monitor queue/financial reconciliation failures.
+- [ ] Conduct UAT with genuine customer, therapist, finance and safety staff test accounts and documented sign-off.
+
+## 20. Deployment and release gates [P0]
+
+- [ ] Configure separate dev/staging/production apps; protected branches and PR review.
+- [ ] Provision production database, backups, storage, transactional email/SMS, queues, error monitoring and payment credentials.
+- [ ] Add feature flags for payment live mode, therapist activation, insurance deductions, emergency escalations and new service categories.
+- [ ] Create admin runbook for verification turnaround, failed payments, refunds, payment reconciliation, misconduct escalation and chargeback handling.
+- [ ] Test production migrations and rollback against staging data shape.
+- [ ] Verify domain, HTTPS, DNS, metadata, sitemap, robots, app manifest/icons and PWA installation.
+- [ ] Disable dev routes, seeded demo accounts, debug logs and unlicensed mock claims before opening production.
+- [ ] Run launch checklist and production smoke test: register, login, search, booking, payment, therapist acceptance/fulfillment, payout pipeline, incident submission, audit logging.
+- [ ] Launch with a limited geographic/service pilot and an on-call escalation/rollback owner.
+- [ ] Monitor the first real settlements, contributions, support cases, notification delivery and privacy/security events before expansion.
+
+---
+
+# Priority-based delivery sequence
+
+| Phase | Delivery target | Main dependencies | Exit gate |
+|---|---|---|---|
+| 0 | Requirements + compliance/business decisions | Brand assets, policy owners, gateway/insurer decisions | Scope and assumptions signed off |
+| 1 | Foundation + design system + PWA shell | Phase 0 | Installable navigable app; CI and DB ready |
+| 2 | Auth + therapist verification + service discovery | Phase 1 | Only eligible therapists searchable |
+| 3 | Availability + booking + lifecycle | Phase 2 | No double booking; complete persisted flow |
+| 4 | Live payments + financial ledger + payouts | Phase 3 | Idempotent payments and balanced reconciliation |
+| 5 | Safety + incident + compliance workflows | Phase 2–4 | Role-separated end-to-end case handling |
+| 6 | Insurance contribution + coverage admin | Phase 4 and approved policy | No duplicate deductions; coverage not overstated |
+| 7 | Full admin dashboards + analytics + support | Prior operational data | Accurate role-scoped operational reports |
+| 8 | Hardening, UAT, pilot, production launch | All launch blockers | Security, E2E, finance, PWA and UAT pass |
+
+**Delivery note:** Safety controls must be built into booking from Phase 3 onward. Phase 5 adds the full investigation dashboard; it is not permission to defer essential safety eligibility checks.
+
+# Explicit acceptance criteria / Definition of Done
+
+A ticket is **Done** only when:
+
+1. Its UI uses the approved Ginhawa design system and behaves correctly on mobile and desktop.
+2. A real authenticated backend endpoint validates input and enforces ownership/RBAC.
+3. State is persisted to the correct database records and appears after refresh/re-login.
+4. All financial, booking and case-state mutations are concurrency-safe, idempotent where necessary, and auditable.
+5. Unit, integration and E2E tests cover the happy path **and** meaningful error/abuse paths.
+6. Sensitive data is redacted from logs, notifications, browser caches and unauthorized responses.
+7. Loading, empty, permission-denied, offline and retry states exist.
+8. Accessibility checks and core mobile device tests pass.
+9. Work is reviewed, merged through CI, and demoable on staging with no fake success toast masking failure.
+10. The implementation and any policy assumptions are documented.
+
+# Suggested first implementation sprint
+
+- [ ] Set up the repository, CI, database, environment separation and app shells.
+- [ ] Extract original Ginhawa brand assets and implement theme tokens; create the eight service category cards.
+- [ ] Build mobile Home with hero, location/service/date picker, **Find a Therapist** CTA and bottom nav.
+- [ ] Build public therapist directory/detail with seeded **fictional** development-only data.
+- [ ] Implement authentication and role-scoped routes (Customer, Therapist, Admin).
+- [ ] Installable PWA: manifest, icons, controlled caching and basic offline fallback.
+- [ ] Set up a minimal bookings domain schema and mocked payment *adapter in test mode*; do not represent test transactions as successful real payments.
+- [ ] Add deterministic unit tests for therapist eligibility and duplicate booking prevention.
+- [ ] Demo the user path **Home → Search → Therapist Profile → Booking Draft** on a phone viewport.
+
+# Open decisions (product owner approval required before live rollout)
+
+1. **Service credentials:** Which service types require healthcare licenses, certifications or specific qualifications?
+2. **Booking model:** Instant confirmation vs therapist accept/decline; deposit/full prepayment; cancellation fees.
+3. **Location:** Exact initial coverage cities/barangays, home-visit travel fee and clinic/on-site restrictions.
+4. **Payments:** Gateway/provider, merchant of record, receipts, settlement/payout timing, dispute ownership.
+5. **Example ₱1,000 split:** Whether 2%, 12% and 22% are independent gross deductions, tax-inclusive amounts, withholding or other; how ₱50 changes therapist payout.
+6. **Insurance:** Deduction trigger, refund reversals, premium transfer, selected insurer, real coverage evidence and claims responsibility.
+7. **Safety operations:** Staff contact hours, escalation SLAs, evidence retention, anonymous reports, appeals and emergency contacts.
+8. **Medical claims:** Which treatments/teleconsultations are legally in scope and what credentials, supervision and consent are required.
+9. **Identity/privacy:** What identity documents are necessary, retention periods and permitted downstream processors.
+10. **Languages:** English-only initial release vs English + Filipino UI.
+
+---
+
+**Source alignment:** This backlog incorporates the supplied red/gold Ginhawa logo and responsive website mockup, and the attached “Ginhawa App Master Workflow” outlining customer, therapist, admin, safety/compliance, payment and insurance-fund journeys. Technology choices, enhanced security controls, detailed architecture and release sequencing are proposed implementation decisions, not assertions that those details were already settled in the source.

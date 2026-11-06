@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>Ginhawa App — Professional Care. Natural Healing. A Better You.</title>
+  <meta name="description" content="Book certified therapists, access wellness services, and take control of your health — anytime, anywhere in the Philippines. DOH-licensed massage and physical therapy." />
+  
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="Ginhawa App — Professional Care. Natural Healing. A Better You." />
+  <meta property="og:description" content="Book certified therapists, access wellness services, and take control of your health — anytime, anywhere." />
+  <meta property="og:image" content="/assets/logo.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#580B15" />
+
+  <!-- PWA Manifest & App Icons -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+  <link rel="apple-touch-icon" href="assets/logo.jpg" />
+
+  <!-- FontAwesome 6 for crisp icons matching the reference design -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Ginhawa Master Production Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Dev & Demo Multi-Role Ribbon -->
+  <aside class="role-bar">
+    <div class="role-bar-left">
+      <span class="role-tag"><i class="fa-solid fa-layer-group"></i> Ginhawa Multi-Portal</span>
+      <span>Live Operational Prototype</span>
+    </div>
+    <div class="role-links">
+      <span style="opacity: 0.6; font-size: 0.72rem;">Switch Portal View:</span>
+      <a href="index.html" class="role-link-btn active" data-role="customer"><i class="fa-solid fa-user"></i> Client App</a>
+      <a href="therapist-portal.html" class="role-link-btn" data-role="therapist"><i class="fa-solid fa-user-doctor"></i> Therapist Portal</a>
+      <a href="safety.html" class="role-link-btn" data-role="safety"><i class="fa-solid fa-shield-halved"></i> Safety & Compliance</a>
+    </div>
+  </aside>
+
+  <!-- PWA Install Prompt Banner (Visible on mobile when installable) -->
+  <div id="pwa-install-banner" style="display:none; background:#FFFBEB; border-bottom:1px solid #FDE68A; padding:10px 16px; font-size:0.84rem; justify-content:space-between; align-items:center;">
+    <div style="display:flex; align-items:center; gap:8px; color:#92400E;">
+      <i class="fa-solid fa-mobile-screen"></i>
+      <span>Install <strong>Ginhawa App</strong> for faster bookings and offline access.</span>
+    </div>
+    <button onclick="triggerPwaInstall()" style="background:#78101E; color:#fff; padding:5px 12px; border-radius:6px; font-weight:700; font-size:0.78rem;">Install App</button>
+  </div>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-header">
+    <div class="container header-inner">
+      <!-- Zone 1: Brand Lockup with Gold Emblem -->
+      <a href="index.html" class="brand-lockup">
+        <img src="assets/logo.jpg" alt="Ginhawa App Golden Emblem" class="brand-emblem" />
+        <div class="brand-text">
+          <span class="brand-title">GINHAWA</span>
+          <span class="brand-sub">A P P</span>
+        </div>
+      </a>
+
+      <!-- Zone 2: Navigation Links -->
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="therapists.html" class="nav-link">Therapists</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+        <a href="safety.html" class="nav-link">Safety & Compliance</a>
+        <a href="how-it-works.html#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Zone 3: Header Actions -->
+      <div class="header-actions">
+        <button class="btn-icon" aria-label="Search Services" onclick="document.getElementById('search-location').focus();">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <a href="therapist-portal.html" class="btn-login">Login</a>
+        <button class="btn-signup" onclick="openBookingModal()">Book Appointment</button>
+        <button class="mobile-menu-trigger" id="mobile-toggle" aria-label="Open Navigation Menu" onclick="openBookingModal()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section (Matches Reference Screenshot 1:1) -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Left Hero Column -->
+        <div class="hero-content">
+          <!-- Large Emblem Branding -->
+          <div class="hero-emblem-large">
+            <img src="assets/logo.jpg" alt="Ginhawa Emblem" class="hero-emblem-img" />
+            <div class="hero-emblem-text">
+              <h2>GINHAWA</h2>
+              <span>— A P P —</span>
+            </div>
+          </div>
+
+          <h1 class="hero-headline">
+            Professional Care. Natural Healing. A Better You.
+          </h1>
+
+          <p class="hero-subhead">
+            Book certified therapists, access wellness services, and take control of your health — anytime, anywhere across Metro Manila, Cebu, and Davao.
+          </p>
+
+          <!-- Floating White Quick Search Form -->
+          <div class="search-bar-card">
+            <form id="hero-search-form" class="search-form-grid">
+              
+              <!-- Location Field -->
+              <div class="search-field">
+                <i class="fa-solid fa-location-dot search-field-icon"></i>
+                <div class="search-field-content">
+                  <span class="search-field-label">Location</span>
+                  <select id="search-location" class="search-field-select">
+                    <option value="all">Select Location</option>
+                    <option value="BGC Taguig">BGC / Taguig</option>
+                    <option value="Makati">Makati City</option>
+                    <option value="Quezon City">Quezon City</option>
+                    <option value="Pasig">Pasig / Ortigas</option>
+                    <option value="Manila">City of Manila</option>
+                    <option value="Mandaluyong">Mandaluyong / San Juan</option>
+                    <option value="Alabang">Alabang / Muntinlupa</option>
+                    <option value="Home Service">Home Service (Any Address)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Service Field -->
+              <div class="search-field">
+                <i class="fa-solid fa-hand-holding-medical search-field-icon"></i>
+                <div class="search-field-content">
+                  <span class="search-field-label">Service</span>
+                  <select id="search-service" class="search-field-select">
+                    <option value="all">Select Service</option>
+                    <option value="massage-therapy">Massage Therapy (Hilot/Swedish)</option>
+                    <option value="muscle-joint-care">Muscle & Joint Care</option>
+                    <option value="pain-relief">Pain Relief (Sciatica/Back)</option>
+                    <option value="body-alignment">Body Alignment</option>
+                    <option value="rehabilitation">Rehabilitation</option>
+                    <option value="wellness-programs">Wellness Programs</option>
+                    <option value="online-consultation">Online Consultation</option>
+                    <option value="home-service">Home Service</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Date Field -->
+              <div class="search-field">
+                <i class="fa-regular fa-calendar-days search-field-icon"></i>
+                <div class="search-field-content">
+                  <span class="search-field-label">Date</span>
+                  <select id="search-date" class="search-field-select">
+                    <option value="today">Select Date (Today)</option>
+                    <option value="tomorrow">Tomorrow</option>
+                    <option value="weekend">This Weekend</option>
+                    <option value="custom">Choose Specific Date...</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn-search-submit">
+                <span>Find a Therapist</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Right Hero Column (Visual Therapy Frame with Calligraphy Tag) -->
+        <div class="hero-media-wrap">
+          <div class="hero-photo-frame">
+            <img src="assets/mockup.jpg" 
+                 alt="Professional Therapy Treatment" 
+                 class="hero-photo-img" 
+                 referrerpolicy="no-referrer"
+                 onerror="this.src='assets/logo.jpg';" />
+            
+            <!-- Calligraphy Accent "Ginhawa Sa Bawat Katawan" -->
+            <div class="hero-script-tag">
+              <span class="script-accent">Ginhawa<br>Sa Bawat<br>Katawan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 Service Shortcut Cards Strip (Directly reproducing the reference layout) -->
+      <div class="services-strip-wrap">
+        <div class="services-strip-grid">
+          
+          <div class="service-tile" onclick="selectServiceShortcut('massage-therapy')">
+            <div class="service-tile-icon">
+              <i class="fa-solid fa-hands"></i>
+            </div>
+            <span class="service-tile-name">Massage Therapy</span>
+          </div>
+
+          <div class="service-tile" onclick="selectServiceShortcut('muscle-joint-care')">
+            <div class="service-tile-icon">
+              <i class="fa-solid fa-bone"></i>
+            </div>
+            <span class="service-tile-name">Muscle & Joint Care</span>
+          </div>
+
+          <div class="service-tile" onclick="selectServiceShortcut('pain-relief')">
+            <div class="service-tile-icon">
+              <i class="fa-solid fa-fire-flame-curved"></i>
+            </div>
+            <span class="service-tile-name">Pain Relief</span>
+          </div>
+
+          <div class="service-tile" onclick="selectServiceShortcut('body-alignment')">
+            <div class="service-tile-icon">
+              <i class="fa-solid fa-child-reaching"></i>
+            </div>
+            <span class="service-tile-name">Body Alignment</span>
+          </div>
+
+          <div class="service-tile" onclick="selectServiceShortcut('rehabilitation')">
+            <div class="service-tile-icon">
+              <i class="fa-solid fa-person-running"></i>
+            </div>
+            <span class="service-tile-name">Rehabilitation</span>
+          </div>
+
+          <div class="service-tile" onclick="selectServiceShortcut('wellness-programs')">
+            <div class="service-tile-icon">
+              <i class="fa-solid fa-spa"></i>
+            </div>
+            <span class="service-tile-name">Wellness Programs</span>
+          </div>
+
+          <div class="service-tile" onclick="selectServiceShortcut('online-consultation')">
+            <div class="service-tile-icon">
+              <i class="fa-solid fa-video"></i>
+            </div>
+            <span class="service-tile-name">Online Consultation</span>
+          </div>
+
+          <div class="service-tile" onclick="selectServiceShortcut('home-service')">
+            <div class="service-tile-icon">
+              <i class="fa-solid fa-house-user"></i>
+            </div>
+            <span class="service-tile-name">Home Service</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section: Why Choose Ginhawa App (Trust & Pillars) -->
+  <section class="section-trust" id="about">
+    <div class="container">
+      <div class="trust-split-grid">
+        
+        <!-- Left: Therapy Image with Floating Badge -->
+        <div class="trust-media-wrap">
+          <div class="trust-main-card">
+            <img src="assets/mockup.jpg" 
+                 alt="Certified Ginhawa Therapist in Action" 
+                 referrerpolicy="no-referrer"
+                 onerror="this.src='assets/logo.jpg';" />
+          </div>
+          <div class="trust-floating-badge">
+            <div class="badge-icon-wrap">
+              <i class="fa-solid fa-shield-heart"></i>
+            </div>
+            <div>
+              <strong>100% Certified & Verified</strong>
+              <span>DOH · PRC · TESDA NC-II Credentials</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Trust Pillars & Mission -->
+        <div class="trust-content">
+          <span class="section-kicker">WHY CHOOSE GINHAWA APP</span>
+          <h2 class="section-title">Your Wellness Partner in Every Step</h2>
+          <p class="section-lead">
+            Ginhawa App connects you with certified and verified therapists for safe, professional, and effective wellness services right in the comfort of your home or partner clinic.
+          </p>
+
+          <div class="trust-pillars-grid">
+            
+            <div class="trust-pillar-card">
+              <div class="pillar-icon-box">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <h3 class="pillar-title">Verified Therapists</h3>
+              <p class="pillar-desc">
+                Every practitioner undergoes strict identity checks, professional licensure audit, and background screening.
+              </p>
+            </div>
+
+            <div class="trust-pillar-card">
+              <div class="pillar-icon-box">
+                <i class="fa-solid fa-award"></i>
+              </div>
+              <h3 class="pillar-title">Safe & Secure Booking</h3>
+              <p class="pillar-desc">
+                Real-time booking confirmations, transparent fees, and strict privacy under the Data Privacy Act (RA 10173).
+              </p>
+            </div>
+
+            <div class="trust-pillar-card">
+              <div class="pillar-icon-box">
+                <i class="fa-solid fa-heart"></i>
+              </div>
+              <h3 class="pillar-title">Trusted by Clients</h3>
+              <p class="pillar-desc">
+                Rated 4.98/5 across over 14,000 completed sessions with genuine, verified post-appointment reviews.
+              </p>
+            </div>
+
+            <div class="trust-pillar-card">
+              <div class="pillar-icon-box">
+                <i class="fa-solid fa-leaf"></i>
+              </div>
+              <h3 class="pillar-title">Holistic & Natural</h3>
+              <p class="pillar-desc">
+                Combining indigenous Philippine Hilot with contemporary physical therapy science for lasting bodily relief.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: How Ginhawa App Works (4 Easy Steps) -->
+  <section class="section-how-it-works" id="how-it-works">
+    <div class="container">
+      
+      <div class="how-header-row">
+        <div>
+          <span class="section-kicker">HOW GINHAWA APP WORKS</span>
+          <h2 class="section-title" style="margin-bottom:0;">Simple. Fast. Convenient.</h2>
+        </div>
+        <a href="how-it-works.html" class="btn-outline-gold">
+          <span>Learn More</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="steps-grid">
+        
+        <div class="step-card">
+          <div class="step-number-bubble">1</div>
+          <div class="step-icon-wrap">
+            <i class="fa-solid fa-user-plus"></i>
+          </div>
+          <h3 class="step-title">Create an Account</h3>
+          <p class="step-desc">
+            Sign up in 30 seconds as a client seeking relief or apply as a licensed therapist partner.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number-bubble">2</div>
+          <div class="step-icon-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <h3 class="step-title">Choose a Service</h3>
+          <p class="step-desc">
+            Browse our 8 therapeutic categories and select your preferred healing specialty.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number-bubble">3</div>
+          <div class="step-icon-wrap">
+            <i class="fa-regular fa-calendar-check"></i>
+          </div>
+          <h3 class="step-title">Book & Confirm</h3>
+          <p class="step-desc">
+            Pick your date, time, and home service address with transparent pricing and no hidden costs.
+          </p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number-bubble">4</div>
+          <div class="step-icon-wrap">
+            <i class="fa-solid fa-spa"></i>
+          </div>
+          <h3 class="step-title">Receive Treatment</h3>
+          <p class="step-desc">
+            Enjoy certified professional care, personalized attention, and experience true ginhawa.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section: Featured Verified Therapists -->
+  <section class="section-therapists" id="therapists">
+    <div class="container">
+      
+      <div style="text-align: center; max-width: 680px; margin: 0 auto 36px auto;">
+        <span class="section-kicker">VERIFIED PRACTITIONERS</span>
+        <h2 class="section-title">Meet Our Certified Therapists</h2>
+        <p class="section-lead" style="margin-bottom:0;">
+          All practitioners carry active government licenses, TESDA NC-II certifications, and specialized clinical experience.
+        </p>
+      </div>
+
+      <!-- Therapists Card Grid -->
+      <div class="therapists-grid" id="featured-therapists-list">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="therapists.html" class="btn-signup" style="display:inline-block; padding: 12px 32px; font-size: 0.95rem;">
+          Browse All 48+ Verified Therapists <i class="fa-solid fa-arrow-right" style="margin-left:6px;"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section: Safety, Compliance & Therapist Welfare Banner -->
+  <section class="section-safety-banner">
+    <div class="container">
+      <div class="safety-banner-grid">
+        
+        <div class="safety-banner-content">
+          <span style="color:var(--gold-light); font-size:0.8rem; font-weight:800; letter-spacing:0.18em; text-transform:uppercase;">
+            SAFETY & INTEGRITY STANDARDS
+          </span>
+          <h2>Professional Care You Can Always Trust</h2>
+          <p>
+            We enforce strict anti-misconduct protocols, mandatory pre-session health triage, emergency hotline access, and comprehensive welfare coverage for our therapist network.
+          </p>
+          <div class="safety-points-list">
+            <div class="safety-point-item">
+              <i class="fa-solid fa-check"></i>
+              <span>Full Identity & NBI Clearance</span>
+            </div>
+            <div class="safety-point-item">
+              <i class="fa-solid fa-check"></i>
+              <span>Zero-Tolerance Misconduct Policy</span>
+            </div>
+            <div class="safety-point-item">
+              <i class="fa-solid fa-check"></i>
+              <span>24/7 Safety Escalation Dispatch</span>
+            </div>
+            <div class="safety-point-item">
+              <i class="fa-solid fa-check"></i>
+              <span>₱50 Insurance Contribution / Booking</span>
+            </div>
+          </div>
+
+          <div style="margin-top:24px; display:flex; gap:14px; flex-wrap:wrap;">
+            <a href="safety.html" class="btn-outline-gold" style="border-color:var(--gold-light); color:var(--gold-light);">
+              Safety & Compliance Guide
+            </a>
+            <button onclick="openSafetyModal()" style="background:#B82537; color:#fff; padding:10px 20px; border-radius:10px; font-weight:700; font-size:0.88rem; display:flex; align-items:center; gap:8px;">
+              <i class="fa-solid fa-triangle-exclamation"></i> Report a Safety Concern
+            </button>
+          </div>
+        </div>
+
+        <div class="insurance-fund-badge">
+          <h3>Therapist Welfare Fund</h3>
+          <p>
+            Every qualifying booking contributes <strong>₱50</strong> toward the therapist's safety, medical, and professional liability insurance pool.
+          </p>
+          <div class="fund-metric">₱3,500</div>
+          <div class="fund-sub">Target Cycle Threshold (70 Bookings)</div>
+          <div style="margin-top: 18px; background: rgba(0,0,0,0.3); border-radius: 999px; height: 10px; overflow: hidden;">
+            <div style="background: var(--gold-gradient); width: 68%; height: 100%;"></div>
+          </div>
+          <small style="color: var(--gold-pale); display: block; margin-top: 8px; font-size: 0.75rem;">
+            Network Cycle Progress: 68% Funded across active practitioners
+          </small>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer" id="contact">
+    <div class="container">
+      <div class="footer-top-grid">
+        
+        <div class="footer-brand">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+            <img src="assets/logo.jpg" alt="Ginhawa" style="width:38px; height:38px; border-radius:8px;" />
+            <h3 style="margin-bottom:0;">GINHAWA APP</h3>
+          </div>
+          <p>
+            Professional Care. Natural Healing. A Better You. The premier mobile healthcare & wellness booking platform in the Philippines.
+          </p>
+          <div style="margin-top:16px; font-size:0.82rem; color:var(--gold-pale);">
+            <i class="fa-solid fa-location-dot" style="margin-right:6px;"></i> High Street, Bonifacio Global City, Taguig, Philippines
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#massage-therapy">Massage Therapy (Hilot)</a></li>
+            <li><a href="services.html#muscle-joint-care">Muscle & Joint Care</a></li>
+            <li><a href="services.html#pain-relief">Pain Relief & Decompression</a></li>
+            <li><a href="services.html#body-alignment">Body Alignment</a></li>
+            <li><a href="services.html#rehabilitation">Rehabilitation Therapy</a></li>
+            <li><a href="services.html#home-service">Home Service Packages</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Practitioners</h4>
+          <ul>
+            <li><a href="therapist-portal.html">Therapist Portal</a></li>
+            <li><a href="therapist-portal.html#register">Join as Certified Therapist</a></li>
+            <li><a href="safety.html#insurance">Welfare Fund & Insurance</a></li>
+            <li><a href="safety.html#conduct">Code of Professional Conduct</a></li>
+            <li><a href="how-it-works.html#fees">Transparent Fee Model</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Customer Care & Safety</h4>
+          <ul>
+            <li><a href="safety.html">Safety & Compliance Center</a></li>
+            <li><a href="javascript:void(0)" onclick="openSafetyModal()">Report an Incident / Concern</a></li>
+            <li><a href="how-it-works.html#privacy">Data Privacy Notice (RA 10173)</a></li>
+            <li><a href="how-it-works.html#terms">Terms of Service</a></li>
+            <li style="color:#F4D375; font-weight:700; margin-top:8px;">
+              <i class="fa-solid fa-phone" style="margin-right:6px;"></i> Safety Hotline: (02) 8888-GINH
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom-row">
+        <div>
+          &copy; 2026 Ginhawa Health & Wellness Technologies Inc. All rights reserved.
+        </div>
+        <div style="display:flex; gap:16px;">
+          <a href="how-it-works.html#privacy">Privacy Policy</a>
+          <span>·</span>
+          <a href="how-it-works.html#terms">Terms of Service</a>
+          <span>·</span>
+          <a href="safety.html">DOH & TESDA Standards</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Tab Navigation (Thumb-Zone Ergonomics) -->
+  <nav class="mobile-tab-bar">
+    <div class="tab-bar-grid">
+      <a href="index.html" class="tab-item active">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="services.html" class="tab-item">
+        <i class="fa-solid fa-compass"></i>
+        <span>Explore</span>
+      </a>
+      <a href="javascript:void(0)" class="tab-item" onclick="openBookingModal()">
+        <i class="fa-solid fa-calendar-plus" style="color:var(--crimson-primary);"></i>
+        <span>Book</span>
+      </a>
+      <a href="safety.html" class="tab-item">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>Safety</span>
+      </a>
+      <a href="therapist-portal.html" class="tab-item">
+        <i class="fa-solid fa-user"></i>
+        <span>Portal</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Interactive Multi-Step Booking Modal -->
+  <div id="booking-modal-overlay" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <img src="assets/logo.jpg" alt="Ginhawa" style="width:30px; height:30px; border-radius:6px;" />
+          <h3 id="modal-title">Book Ginhawa Appointment</h3>
+        </div>
+        <button id="booking-modal-close" class="modal-close-btn" aria-label="Close modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Progress Stepper -->
+        <div class="modal-stepper">
+          <div class="step-indicator active" id="step-indicator-1">
+            <span class="step-dot">1</span>
+            <span>Service</span>
+          </div>
+          <div class="step-indicator" id="step-indicator-2">
+            <span class="step-dot">2</span>
+            <span>Schedule</span>
+          </div>
+          <div class="step-indicator" id="step-indicator-3">
+            <span class="step-dot">3</span>
+            <span>Screening</span>
+          </div>
+          <div class="step-indicator" id="step-indicator-4">
+            <span class="step-dot">4</span>
+            <span>Review</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Step Content -->
+        <div id="modal-step-content">
+          <!-- Populated by app.js -->
+        </div>
+
+        <!-- Step Navigation Controls -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:24px; border-top:1px solid #eee; padding-top:16px;">
+          <button id="modal-btn-prev" type="button" class="btn-outline-gold" style="display:none; padding:8px 18px;">
+            <i class="fa-solid fa-arrow-left"></i> Back
+          </button>
+          <div style="margin-left:auto;">
+            <button id="modal-btn-next" type="button" class="btn-signup" style="padding:10px 24px;">
+              Continue <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Safety Concern & Emergency Modal -->
+  <div id="safety-modal-overlay" class="modal-overlay">
+    <div class="modal-dialog" style="max-width:520px;">
+      <div class="modal-header" style="background: linear-gradient(135deg, #78101E 0%, #38040B 100%);">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <i class="fa-solid fa-shield-halved" style="color:var(--gold-light);"></i>
+          <h3>Safety Incident & Concern Intake</h3>
+        </div>
+        <button onclick="closeSafetyModal()" class="modal-close-btn" aria-label="Close modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="background:#FEE2E2; border:1px solid #FCA5A5; border-radius:10px; padding:12px; margin-bottom:16px; font-size:0.84rem; color:#991B1B;">
+          <strong>Urgent Threat?</strong> If you or anyone is in immediate physical danger, call national emergency hotline <strong>911</strong> immediately before filing this form.
+        </div>
+        
+        <form onsubmit="submitSafetyReport(event)">
+          <div class="form-group">
+            <label class="form-label">Category of Concern</label>
+            <select id="incident-category" class="form-select" required>
+              <option value="Professional Misconduct">Professional Misconduct / Boundary Breach</option>
+              <option value="Harassment / Unsafe Behavior">Harassment or Unsafe Behavior</option>
+              <option value="Therapist Late / No Show">Therapist Attendance / Late Arrival</option>
+              <option value="Health & Hygiene Concern">Sanitation or Health Screening Issue</option>
+              <option value="Billing / Payment Dispute">Payment / Overcharge Dispute</option>
+              <option value="Other">Other Operational Concern</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Triage Urgency</label>
+            <select id="incident-severity" class="form-select">
+              <option value="Low">Low (Informational / Feedback)</option>
+              <option value="Moderate" selected>Moderate (Requires Follow-up within 24h)</option>
+              <option value="High">High (Urgent Investigation within 4h)</option>
+              <option value="Critical">Critical (Immediate Account Restriction & Escalation)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Incident Description & Location Details</label>
+            <textarea id="incident-desc" class="form-textarea" rows="3" placeholder="Please provide date, location, booking ref (if known), and brief summary of what occurred..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Your Contact Number (for confidential safety officer callback)</label>
+            <input type="tel" class="form-input" placeholder="+63 9XX XXX XXXX" required />
+          </div>
+
+          <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+            <button type="button" onclick="closeSafetyModal()" class="btn-outline-gold" style="padding:8px 16px;">Cancel</button>
+            <button type="submit" class="btn-signup" style="background:#B82537; padding:9px 20px;">
+              Submit Confidential Report
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Master JavaScript Application -->
+  <script src="js/app.js"></script>
+</body>
+</html>

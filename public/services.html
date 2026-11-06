@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services Catalog — Ginhawa App</title>
+  <meta name="description" content="Explore our 8 therapeutic wellness services: Massage Therapy, Muscle & Joint Care, Pain Relief, Body Alignment, Rehabilitation, Wellness Programs, and Home Service." />
+  
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-lockup">
+        <img src="assets/logo.jpg" alt="Ginhawa Emblem" class="brand-emblem" />
+        <div class="brand-text">
+          <span class="brand-title">GINHAWA</span>
+          <span class="brand-sub">A P P</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="services.html" class="nav-link active">Services</a>
+        <a href="therapists.html" class="nav-link">Therapists</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+        <a href="safety.html" class="nav-link">Safety & Compliance</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="therapist-portal.html" class="btn-login">Login</a>
+        <button class="btn-signup" onclick="openBookingModal()">Book Appointment</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header Banner -->
+  <section style="background: radial-gradient(circle at 80% 20%, #7A1422, #3E060D); color: #fff; padding: 56px 0; border-bottom: 2px solid rgba(212, 175, 55, 0.3);">
+    <div class="container" style="text-align: center; max-width: 780px;">
+      <span class="section-kicker" style="color: var(--gold-light);">CLINICAL & WELLNESS DIRECTORY</span>
+      <h1 style="font-size: clamp(2rem, 3.2vw, 2.8rem); margin-bottom: 12px; color: #FFFDF8;">
+        Eight Specialized Paths to Natural Relief
+      </h1>
+      <p style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; line-height: 1.6;">
+        From authentic traditional Hilot to licensed physical rehabilitation, every treatment is delivered by verified government-credentialed professionals.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Services Grid -->
+  <main class="container" style="padding: 64px 24px;">
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 32px;">
+      
+      <!-- 1. Massage Therapy -->
+      <article class="trust-pillar-card" style="padding: 28px; background: #fff; border-radius: 18px; border: 1px solid var(--border-card); box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+          <div class="pillar-icon-box" style="font-size: 1.5rem;">
+            <i class="fa-solid fa-hands"></i>
+          </div>
+          <span style="font-weight: 800; font-size: 1.25rem; color: var(--crimson-dark);">₱850 <small style="font-size: 0.75rem; font-weight: normal; color: #666;">/ 60m</small></span>
+        </div>
+        <h2 style="font-size: 1.3rem; color: var(--crimson-dark); margin-top: 12px;">Massage Therapy</h2>
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--gold-dark); text-transform: uppercase;">Traditional Hilot · Swedish · Shiatsu</span>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 12px 0;">
+          Authentic Filipino healing using warm virgin coconut oil and banana leaf scanning (Pagpupulso) to identify muscle blockages (hangin and lamig).
+        </p>
+        <div style="margin-bottom: 18px; font-size: 0.82rem; color: #555;">
+          <strong>Target Indications:</strong> Chronic fatigue, tension knots, insomnia, poor blood circulation.
+        </div>
+        <button class="btn-signup" style="width: 100%; text-align: center;" onclick="openBookingModal('massage-therapy')">
+          Book Massage Therapy
+        </button>
+      </article>
+
+      <!-- 2. Muscle & Joint Care -->
+      <article class="trust-pillar-card" style="padding: 28px; background: #fff; border-radius: 18px; border: 1px solid var(--border-card); box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+          <div class="pillar-icon-box" style="font-size: 1.5rem;">
+            <i class="fa-solid fa-bone"></i>
+          </div>
+          <span style="font-weight: 800; font-size: 1.25rem; color: var(--crimson-dark);">₱1,050 <small style="font-size: 0.75rem; font-weight: normal; color: #666;">/ 60m</small></span>
+        </div>
+        <h2 style="font-size: 1.3rem; color: var(--crimson-dark); margin-top: 12px;">Muscle & Joint Care</h2>
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--gold-dark); text-transform: uppercase;">Myofascial Decompression</span>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 12px 0;">
+          Targeted passive joint mobilization and trigger-point release designed to expand range of motion in stiff shoulders, knees, and hips.
+        </p>
+        <div style="margin-bottom: 18px; font-size: 0.82rem; color: #555;">
+          <strong>Target Indications:</strong> Frozen shoulder, runner's knee, stiff rotator cuffs, joint capsular tightness.
+        </div>
+        <button class="btn-signup" style="width: 100%; text-align: center;" onclick="openBookingModal('muscle-joint-care')">
+          Book Joint Care
+        </button>
+      </article>
+
+      <!-- 3. Pain Relief -->
+      <article class="trust-pillar-card" style="padding: 28px; background: #fff; border-radius: 18px; border: 1px solid var(--border-card); box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+          <div class="pillar-icon-box" style="font-size: 1.5rem;">
+            <i class="fa-solid fa-fire-flame-curved"></i>
+          </div>
+          <span style="font-weight: 800; font-size: 1.25rem; color: var(--crimson-dark);">₱1,100 <small style="font-size: 0.75rem; font-weight: normal; color: #666;">/ 60m</small></span>
+        </div>
+        <h2 style="font-size: 1.3rem; color: var(--crimson-dark); margin-top: 12px;">Pain Relief Therapy</h2>
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--gold-dark); text-transform: uppercase;">Neuromuscular Decompression</span>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 12px 0;">
+          Focused therapeutic protocol targeting nerve pathways, piriformis compression, and lumbar paraspinal spasm to relieve debilitating nerve ache.
+        </p>
+        <div style="margin-bottom: 18px; font-size: 0.82rem; color: #555;">
+          <strong>Target Indications:</strong> Sciatica pain, lower back spasm, tech-neck migraine, carpal tunnel.
+        </div>
+        <button class="btn-signup" style="width: 100%; text-align: center;" onclick="openBookingModal('pain-relief')">
+          Book Pain Relief
+        </button>
+      </article>
+
+      <!-- 4. Body Alignment -->
+      <article class="trust-pillar-card" style="padding: 28px; background: #fff; border-radius: 18px; border: 1px solid var(--border-card); box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+          <div class="pillar-icon-box" style="font-size: 1.5rem;">
+            <i class="fa-solid fa-child-reaching"></i>
+          </div>
+          <span style="font-weight: 800; font-size: 1.25rem; color: var(--crimson-dark);">₱1,200 <small style="font-size: 0.75rem; font-weight: normal; color: #666;">/ 75m</small></span>
+        </div>
+        <h2 style="font-size: 1.3rem; color: var(--crimson-dark); margin-top: 12px;">Body Alignment</h2>
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--gold-dark); text-transform: uppercase;">Postural & Spinal Restoration</span>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 12px 0;">
+          Full-body postural assessment, pelvic leveling, and kinetic chain alignment to correct desk-bound spinal forward shifts.
+        </p>
+        <div style="margin-bottom: 18px; font-size: 0.82rem; color: #555;">
+          <strong>Target Indications:</strong> Anterior pelvic tilt, rounded shoulders, functional leg-length asymmetry.
+        </div>
+        <button class="btn-signup" style="width: 100%; text-align: center;" onclick="openBookingModal('body-alignment')">
+          Book Body Alignment
+        </button>
+      </article>
+
+      <!-- 5. Rehabilitation -->
+      <article class="trust-pillar-card" style="padding: 28px; background: #fff; border-radius: 18px; border: 1px solid var(--border-card); box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+          <div class="pillar-icon-box" style="font-size: 1.5rem;">
+            <i class="fa-solid fa-person-running"></i>
+          </div>
+          <span style="font-weight: 800; font-size: 1.25rem; color: var(--crimson-dark);">₱1,350 <small style="font-size: 0.75rem; font-weight: normal; color: #666;">/ 60m</small></span>
+        </div>
+        <h2 style="font-size: 1.3rem; color: var(--crimson-dark); margin-top: 12px;">Clinical Rehabilitation</h2>
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--gold-dark); text-transform: uppercase;">Delivered by PRC Licensed PTs</span>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 12px 0;">
+          Physician-cleared restorative physical therapy including therapeutic exercise prescription, gait training, and neuromuscular facilitation.
+        </p>
+        <div style="margin-bottom: 18px; font-size: 0.82rem; color: #555;">
+          <strong>Target Indications:</strong> Post-orthopedic surgery, stroke recovery, sports rehabilitation, ACL recovery.
+        </div>
+        <button class="btn-signup" style="width: 100%; text-align: center;" onclick="openBookingModal('rehabilitation')">
+          Book Rehabilitation
+        </button>
+      </article>
+
+      <!-- 6. Wellness Programs -->
+      <article class="trust-pillar-card" style="padding: 28px; background: #fff; border-radius: 18px; border: 1px solid var(--border-card); box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+          <div class="pillar-icon-box" style="font-size: 1.5rem;">
+            <i class="fa-solid fa-spa"></i>
+          </div>
+          <span style="font-weight: 800; font-size: 1.25rem; color: var(--crimson-dark);">₱950 <small style="font-size: 0.75rem; font-weight: normal; color: #666;">/ 60m</small></span>
+        </div>
+        <h2 style="font-size: 1.3rem; color: var(--crimson-dark); margin-top: 12px;">Wellness Programs</h2>
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--gold-dark); text-transform: uppercase;">Preventative Self-Care</span>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 12px 0;">
+          Holistic routine combining manual lymphatic drainage, herbal heat poultices (Dagdagay), and therapeutic breath guidance for sustained equilibrium.
+        </p>
+        <div style="margin-bottom: 18px; font-size: 0.82rem; color: #555;">
+          <strong>Target Indications:</strong> Fluid stagnation, high stress loads, corporate burnout recovery.
+        </div>
+        <button class="btn-signup" style="width: 100%; text-align: center;" onclick="openBookingModal('wellness-programs')">
+          Book Wellness Program
+        </button>
+      </article>
+
+      <!-- 7. Online Consultation -->
+      <article class="trust-pillar-card" style="padding: 28px; background: #fff; border-radius: 18px; border: 1px solid var(--border-card); box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+          <div class="pillar-icon-box" style="font-size: 1.5rem;">
+            <i class="fa-solid fa-video"></i>
+          </div>
+          <span style="font-weight: 800; font-size: 1.25rem; color: var(--crimson-dark);">₱650 <small style="font-size: 0.75rem; font-weight: normal; color: #666;">/ 45m</small></span>
+        </div>
+        <h2 style="font-size: 1.3rem; color: var(--crimson-dark); margin-top: 12px;">Online Consultation</h2>
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--gold-dark); text-transform: uppercase;">Tele-Health Ergonomic Triage</span>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 12px 0;">
+          Direct video consultation with a Licensed PT to analyze your desk workstation, evaluate pain flare-ups, and receive customized corrective movement drills.
+        </p>
+        <div style="margin-bottom: 18px; font-size: 0.82rem; color: #555;">
+          <strong>Target Indications:</strong> Work-from-home ergonomics, pain triage, exercise form review.
+        </div>
+        <button class="btn-signup" style="width: 100%; text-align: center;" onclick="openBookingModal('online-consultation')">
+          Book Tele-Consult
+        </button>
+      </article>
+
+      <!-- 8. Home Service -->
+      <article class="trust-pillar-card" style="padding: 28px; background: #fff; border-radius: 18px; border: 1px solid var(--border-card); box-shadow: var(--shadow-sm);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+          <div class="pillar-icon-box" style="font-size: 1.5rem;">
+            <i class="fa-solid fa-house-user"></i>
+          </div>
+          <span style="font-weight: 800; font-size: 1.25rem; color: var(--crimson-dark);">₱950 <small style="font-size: 0.75rem; font-weight: normal; color: #666;">/ 60m</small></span>
+        </div>
+        <h2 style="font-size: 1.3rem; color: var(--crimson-dark); margin-top: 12px;">Home Service Direct</h2>
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--gold-dark); text-transform: uppercase;">Doorstep Professional Care</span>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 12px 0;">
+          Our therapists bring high-density portable massage tables, sterile linens, therapeutic balms, and soothing acoustic ambiance directly to your home.
+        </p>
+        <div style="margin-bottom: 18px; font-size: 0.82rem; color: #555;">
+          <strong>Coverage:</strong> BGC, Makati, Quezon City, Pasig, Mandaluyong, Manila, Alabang.
+        </div>
+        <button class="btn-signup" style="width: 100%; text-align: center;" onclick="openBookingModal('home-service')">
+          Book Home Service
+        </button>
+      </article>
+
+    </div>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom-row" style="border:none; padding-top:0;">
+        <div>&copy; 2026 Ginhawa App. Certified Wellness Platform.</div>
+        <div style="display:flex; gap:16px;">
+          <a href="index.html">Home</a>
+          <a href="therapists.html">Therapists</a>
+          <a href="safety.html">Safety Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Tab Navigation -->
+  <nav class="mobile-tab-bar">
+    <div class="tab-bar-grid">
+      <a href="index.html" class="tab-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+      <a href="services.html" class="tab-item active"><i class="fa-solid fa-compass"></i><span>Explore</span></a>
+      <a href="javascript:void(0)" class="tab-item" onclick="openBookingModal()"><i class="fa-solid fa-calendar-plus" style="color:var(--crimson-primary);"></i><span>Book</span></a>
+      <a href="safety.html" class="tab-item"><i class="fa-solid fa-shield-halved"></i><span>Safety</span></a>
+      <a href="therapist-portal.html" class="tab-item"><i class="fa-solid fa-user"></i><span>Portal</span></a>
+    </div>
+  </nav>
+
+  <!-- Include App Modal & Script -->
+  <div id="booking-modal-overlay" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="modal-title">Book Ginhawa Appointment</h3>
+        <button id="booking-modal-close" class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-stepper">
+          <div class="step-indicator active" id="step-indicator-1"><span class="step-dot">1</span><span>Service</span></div>
+          <div class="step-indicator" id="step-indicator-2"><span class="step-dot">2</span><span>Schedule</span></div>
+          <div class="step-indicator" id="step-indicator-3"><span class="step-dot">3</span><span>Screening</span></div>
+          <div class="step-indicator" id="step-indicator-4"><span class="step-dot">4</span><span>Review</span></div>
+        </div>
+        <div id="modal-step-content"></div>
+        <div style="display:flex; justify-content:space-between; margin-top:20px; border-top:1px solid #eee; padding-top:16px;">
+          <button id="modal-btn-prev" type="button" class="btn-outline-gold" style="display:none; padding:8px 18px;">Back</button>
+          <div style="margin-left:auto;">
+            <button id="modal-btn-next" type="button" class="btn-signup">Continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>

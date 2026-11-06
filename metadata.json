@@ -1,0 +1,6 @@
+{
+  "name": "Ginhawa App - Professional Care & Natural Healing",
+  "description": "Ginhawa App connects clients with certified and verified therapists for massage therapy, pain relief, body alignment, rehabilitation, and home wellness services across the Philippines.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

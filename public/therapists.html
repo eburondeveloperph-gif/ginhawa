@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verified Therapists — Ginhawa App</title>
+  <meta name="description" content="Browse verified and certified physical and massage therapists across Metro Manila. DOH-LMT and PRC-PTRP licensed practitioners." />
+  
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-lockup">
+        <img src="assets/logo.jpg" alt="Ginhawa Emblem" class="brand-emblem" />
+        <div class="brand-text">
+          <span class="brand-title">GINHAWA</span>
+          <span class="brand-sub">A P P</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="therapists.html" class="nav-link active">Therapists</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+        <a href="safety.html" class="nav-link">Safety & Compliance</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="therapist-portal.html" class="btn-login">Login</a>
+        <button class="btn-signup" onclick="openBookingModal()">Book Appointment</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Header Banner with Live Search Filter -->
+  <section style="background: radial-gradient(circle at 80% 20%, #7A1422, #3E060D); color: #fff; padding: 48px 0; border-bottom: 2px solid rgba(212, 175, 55, 0.3);">
+    <div class="container" style="max-width: 900px; text-align: center;">
+      <span class="section-kicker" style="color: var(--gold-light);">CREDENTIALED PRACTITIONER NETWORK</span>
+      <h1 style="font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 12px; color: #FFFDF8;">
+        Verified Therapists Ready for Service
+      </h1>
+      <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.95rem; margin-bottom: 28px;">
+        Every therapist on Ginhawa is vetted through PRC/DOH license verification, NBI clearances, and hands-on skill evaluations.
+      </p>
+
+      <!-- Instant Filter Bar -->
+      <div style="background: #fff; border-radius: 16px; padding: 12px 18px; display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; box-shadow: var(--shadow-lg);">
+        <select id="search-location" class="form-select" onchange="applyDirectoryFilters()">
+          <option value="all">All Locations (Metro Manila)</option>
+          <option value="BGC Taguig">BGC / Taguig</option>
+          <option value="Makati">Makati City</option>
+          <option value="Quezon City">Quezon City</option>
+          <option value="Pasig">Pasig / Ortigas</option>
+          <option value="Manila">City of Manila</option>
+          <option value="Mandaluyong">Mandaluyong</option>
+          <option value="Alabang">Alabang / South</option>
+          <option value="Home Service">Home Service Available</option>
+        </select>
+
+        <select id="search-service" class="form-select" onchange="applyDirectoryFilters()">
+          <option value="all">All Specialties</option>
+          <option value="massage-therapy">Massage Therapy (Hilot)</option>
+          <option value="muscle-joint-care">Muscle & Joint Care</option>
+          <option value="pain-relief">Pain Relief (Sciatica/Back)</option>
+          <option value="body-alignment">Body Alignment</option>
+          <option value="rehabilitation">Rehabilitation (Licensed PT)</option>
+        </select>
+
+        <button onclick="applyDirectoryFilters()" class="btn-signup" style="padding: 10px 24px;">
+          Filter Directory
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Directory Main Content -->
+  <main class="container" style="padding: 56px 24px;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+      <div>
+        <h2 style="font-size: 1.4rem; color: var(--crimson-dark);">Available Practitioners</h2>
+        <span style="font-size: 0.85rem; color: var(--text-muted);">Real-time dispatch status updated every 5 minutes</span>
+      </div>
+      <div style="font-size: 0.85rem; color: #10B981; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+        <i class="fa-solid fa-circle-check"></i> 100% Background-Checked
+      </div>
+    </div>
+
+    <!-- Therapists Grid -->
+    <div class="therapists-grid" id="featured-therapists-list">
+      <!-- Populated by app.js -->
+    </div>
+
+    <!-- Practitioner Quality Charter Box -->
+    <div style="margin-top: 64px; background: #FFF9E6; border: 1px solid #FFE499; border-radius: 18px; padding: 32px; display: grid; grid-template-columns: 1fr 2fr; gap: 32px; align-items: center;">
+      <div>
+        <div class="badge-icon-wrap" style="width: 56px; height: 56px; font-size: 1.5rem; margin-bottom: 14px;">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <h3 style="font-size: 1.25rem; color: #8C6200; margin-bottom: 6px;">The Ginhawa Credential Matrix</h3>
+        <p style="font-size: 0.85rem; color: #666; line-height: 1.5;">
+          Our three-tier audit prevents uncertified practice and guarantees clinical safety.
+        </p>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 0.85rem; color: #444;">
+        <div style="background: #fff; padding: 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06);">
+          <strong style="color: var(--crimson-dark); display: block; margin-bottom: 4px;">Tier 1: PRC Physical Therapists</strong>
+          <span>Authorized for clinical rehab, stroke mobility, and post-operative joint recovery.</span>
+        </div>
+        <div style="background: #fff; padding: 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06);">
+          <strong style="color: var(--crimson-dark); display: block; margin-bottom: 4px;">Tier 2: DOH Licensed Massage Therapists</strong>
+          <span>Authorized for clinical Hilot, deep tissue decompressive bodywork, and Swedish massage.</span>
+        </div>
+        <div style="background: #fff; padding: 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06);">
+          <strong style="color: var(--crimson-dark); display: block; margin-bottom: 4px;">Tier 3: TESDA NC-II Hilot Practitioners</strong>
+          <span>Certified in Philippine traditional wellness, banana leaf diagnosis, and herbal compress.</span>
+        </div>
+        <div style="background: #fff; padding: 16px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06);">
+          <strong style="color: var(--crimson-dark); display: block; margin-bottom: 4px;">Bi-Annual Background Clearances</strong>
+          <span>NBI & police clearance, negative drug test, and communicable disease screening updated semi-annually.</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom-row" style="border:none; padding-top:0;">
+        <div>&copy; 2026 Ginhawa App. Certified Wellness Platform.</div>
+        <div style="display:flex; gap:16px;">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="safety.html">Safety Center</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Tab Navigation -->
+  <nav class="mobile-tab-bar">
+    <div class="tab-bar-grid">
+      <a href="index.html" class="tab-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+      <a href="services.html" class="tab-item"><i class="fa-solid fa-compass"></i><span>Explore</span></a>
+      <a href="javascript:void(0)" class="tab-item" onclick="openBookingModal()"><i class="fa-solid fa-calendar-plus" style="color:var(--crimson-primary);"></i><span>Book</span></a>
+      <a href="safety.html" class="tab-item"><i class="fa-solid fa-shield-halved"></i><span>Safety</span></a>
+      <a href="therapist-portal.html" class="tab-item"><i class="fa-solid fa-user"></i><span>Portal</span></a>
+    </div>
+  </nav>
+
+  <!-- Include App Modal & Script -->
+  <div id="booking-modal-overlay" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="modal-title">Book Ginhawa Appointment</h3>
+        <button id="booking-modal-close" class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-stepper">
+          <div class="step-indicator active" id="step-indicator-1"><span class="step-dot">1</span><span>Service</span></div>
+          <div class="step-indicator" id="step-indicator-2"><span class="step-dot">2</span><span>Schedule</span></div>
+          <div class="step-indicator" id="step-indicator-3"><span class="step-dot">3</span><span>Screening</span></div>
+          <div class="step-indicator" id="step-indicator-4"><span class="step-dot">4</span><span>Review</span></div>
+        </div>
+        <div id="modal-step-content"></div>
+        <div style="display:flex; justify-content:space-between; margin-top:20px; border-top:1px solid #eee; padding-top:16px;">
+          <button id="modal-btn-prev" type="button" class="btn-outline-gold" style="display:none; padding:8px 18px;">Back</button>
+          <div style="margin-left:auto;">
+            <button id="modal-btn-next" type="button" class="btn-signup">Continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+  <script src="js/app.js"></script>
+  <script>
+    function applyDirectoryFilters() {
+      const loc = document.getElementById('search-location')?.value || 'all';
+      const srv = document.getElementById('search-service')?.value || 'all';
+
+      let results = GINHAWA_DATA.therapists;
+      if (loc !== 'all') {
+        results = results.filter(th => th.locations.some(l => l.toLowerCase().includes(loc.toLowerCase())));
+      }
+      if (srv !== 'all') {
+        const srvObj = GINHAWA_DATA.services.find(s => s.id === srv);
+        if (srvObj) {
+          results = results.filter(th => th.specialties.includes(srvObj.name));
+        }
+      }
+      renderFeaturedTherapists(results);
+      showToast(`Showing ${results.length} therapist(s)`, 'info');
+    }
+  </script>
+</body>
+</html>
